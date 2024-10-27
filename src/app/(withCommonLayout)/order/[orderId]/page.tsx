@@ -1,37 +1,28 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useState } from "react";
-import OrderProductSlider from "../orderComponents/OrderProductSlider";
+import React from "react";
 import { CgShoppingCart } from "react-icons/cg";
 import { MdAddShoppingCart } from "react-icons/md";
 import { IoCall } from "react-icons/io5";
 import PolicyCard from "@/components/shared/PolicyCard";
 import MYProductCard from "@/components/ui/MYProductCard";
-import {
-  useGetAllProductQuery,
-  useGetSingleProductQuery,
-} from "@/redux/api/product/productApi";
+import { useGetSingleProductQuery } from "@/redux/api/product/productApi";
+import { useGetAllProductByCategoryQuery } from "@/redux/api/category/categoryApi";
 import { Checkbox } from "antd";
 
 const OrderPage = ({ params }: { params: { orderId: string } }) => {
   const { orderId } = params;
   const { data } = useGetSingleProductQuery(orderId);
-  const { data: allProductData } = useGetAllProductQuery({});
-  const [quantity, setQuantity] = useState(1);
-  const increaseQuantity = () => setQuantity(quantity + 1);
-  const decreaseQuantity = () => {
-    if (quantity > 1) setQuantity(quantity - 1);
-  };
   const product = data?.data;
-  console.log("Single Product:", product);
-
+  const { data: allProductData } = useGetAllProductByCategoryQuery(
+    product?.categoryId
+  );
+  console.log(allProductData);
   return (
     <div className="container mx-auto py-20">
       <div className="flex items-start gap-20">
-        <div className="">
-          <OrderProductSlider sliderPhotoData={product?.photo} />
-        </div>
+        <div className="">{/* <OrderProductSlider  /> */}</div>
         <div className="w-full bg-gray-200 px-5 py-7 ">
           <p className="text-xl font-medium">{product?.name}</p>
           <p className="text-xl font-medium mt-1">
@@ -49,21 +40,6 @@ const OrderPage = ({ params }: { params: { orderId: string } }) => {
                 console.log("Selected sizes:", checkedValues)
               }
             />
-          </div>
-          <div className="flex items-center mt-3 ">
-            <button
-              onClick={decreaseQuantity}
-              className="px-3 py-1 bg-[#ccb864] text-white text-lg font-bold "
-            >
-              -
-            </button>
-            <p className="px-4 py-1 text-lg font-medium border ">{quantity}</p>
-            <button
-              onClick={increaseQuantity}
-              className="px-3 py-1 bg-[#ccb864] text-white text-lg font-bold "
-            >
-              +
-            </button>
           </div>
 
           <div className="flex flex-col gap-3 w-full mt-6 space-y-2 ">

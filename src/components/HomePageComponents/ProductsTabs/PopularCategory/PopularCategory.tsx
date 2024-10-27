@@ -31,7 +31,7 @@ const PopularCategory = () => {
                   alt="img"
                   width={150}
                   height={150}
-                  className="mx-auto"
+                  className="mx-auto w-[150px] h-[150px]"
                 />
               </Zoom>
               <Bounce>

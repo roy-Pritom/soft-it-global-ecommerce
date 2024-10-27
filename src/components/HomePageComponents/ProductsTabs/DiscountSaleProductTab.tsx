@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import MYProductCard from "@/components/ui/MYProductCard";
-import { useGetNewProductQuery } from "@/redux/api/product/productApi";
+import { useGetDiscountProductQuery } from "@/redux/api/product/productApi";
 
-const NewTab = () => {
-  const { data } = useGetNewProductQuery({});
+const DiscountSaleProductTab = () => {
+  const { data } = useGetDiscountProductQuery({});
   const products = data?.data;
-  console.log(products);
   return (
     <div className="pb-20">
       <div className="grid grid-cols-5 gap-2 w-full">
@@ -18,4 +17,4 @@ const NewTab = () => {
   );
 };
 
-export default NewTab;
+export default DiscountSaleProductTab;

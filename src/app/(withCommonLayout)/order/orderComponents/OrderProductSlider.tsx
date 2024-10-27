@@ -8,7 +8,17 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import Image from "next/image";
 
-const OrderProductSlider = ({ sliderPhotoData }: { sliderPhotoData: any }) => {
+const images = [
+  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
+  "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
+  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
+];
+
+type TProps = {
+  width: string;
+};
+
+const OrderProductSlider = ({ width = "592px" }: TProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   //@ts-ignore
   const swiperRef = useRef<SwiperCore | null>(null);
@@ -29,9 +39,9 @@ const OrderProductSlider = ({ sliderPhotoData }: { sliderPhotoData: any }) => {
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         navigation={true}
         modules={[Navigation]}
-        className="w-full md:w-[592px]"
+        className={`w-full md:w-[${width}]`}
       >
-        {sliderPhotoData?.map((data: any) => (
+        {images?.map((data: any) => (
           <SwiperSlide key={data.id} className=" bg-gray-200">
             <div className=" h-[400px]">
               <Image
@@ -48,7 +58,7 @@ const OrderProductSlider = ({ sliderPhotoData }: { sliderPhotoData: any }) => {
       </Swiper>
 
       <div className="thumbnail-container">
-        {sliderPhotoData?.map((data: any, index: number) => (
+        {images?.map((data: any, index: number) => (
           <button
             key={index}
             onClick={() => handleThumbnailClick(index)}

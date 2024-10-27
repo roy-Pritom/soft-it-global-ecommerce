@@ -1,6 +1,8 @@
 import { Tabs, type TabsProps } from "antd";
 import { FaFireAlt } from "react-icons/fa";
 import NewTab from "./ProductsTabs/NewTab";
+import TopProductTab from "./ProductsTabs/TopProductTab";
+import DiscountSaleProductTab from "./ProductsTabs/DiscountSaleProductTab";
 
 // const onChange = (key: string) => {
 //   console.log(key);
@@ -12,14 +14,14 @@ const items: TabsProps["items"] = [
     label: (
       <span className="flex items-center gap-2 text-lg font-bold">NEW</span>
     ),
-    children: <NewTab/>
+    children: <NewTab />,
   },
   {
     key: "2",
     label: (
       <span className="flex items-center gap-2 text-lg font-bold">TOP</span>
     ),
-    children: "Content of Tab Pane 2",
+    children: <TopProductTab />,
   },
   {
     key: "3",
@@ -28,7 +30,7 @@ const items: TabsProps["items"] = [
         <FaFireAlt /> Flash Sale
       </span>
     ),
-    children: "Content of Tab Pane 3",
+    children: <DiscountSaleProductTab />,
   },
 ];
 

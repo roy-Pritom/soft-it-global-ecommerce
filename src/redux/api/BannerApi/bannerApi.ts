@@ -12,7 +12,14 @@ export const bannerApi = baseApi.injectEndpoints({
       },
       providesTags: [TagTypes.banner],
     }),
+    getAllWomanFashion: builder.query({
+      query: () => ({
+        url: "/product/womanFashion",
+        method: "GET",
+      }),
+      providesTags: [TagTypes.product],
+    }),
   }),
 });
 
-export const { useGetAllBannerQuery } = bannerApi;
+export const { useGetAllBannerQuery, useGetAllWomanFashionQuery } = bannerApi;

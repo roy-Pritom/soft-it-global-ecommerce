@@ -21,18 +21,42 @@ export const productApi = baseApi.injectEndpoints({
       },
       providesTags: [TagTypes.product],
     }),
-    getWomanProductFromDB: builder.query({
-      query: () => ({
-        url: "/product/womanFashion",
-        method: "GET",
-      }),
+    getTopProduct: builder.query({
+      query: () => {
+        return {
+          url: `/product/topProduct`,
+          method: "GET",
+        };
+      },
+      providesTags: [TagTypes.product],
+    }),
+    getNewProduct: builder.query({
+      query: () => {
+        return {
+          url: `/product/newProduct`,
+          method: "GET",
+        };
+      },
+      providesTags: [TagTypes.product],
+    }),
+    getDiscountProduct: builder.query({
+      query: () => {
+        return {
+          url: `/product/discountProduct`,
+          method: "GET",
+        };
+      },
       providesTags: [TagTypes.product],
     }),
   }),
 });
 
+// Export hooks for usage in functional components, which are
+// auto-generated based on the defined endpoints
 export const {
   useGetAllProductQuery,
   useGetSingleProductQuery,
-  useGetWomanProductFromDBQuery,
+  useGetNewProductQuery,
+  useGetTopProductQuery,
+  useGetDiscountProductQuery,
 } = productApi;

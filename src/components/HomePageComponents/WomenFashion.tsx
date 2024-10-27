@@ -8,9 +8,9 @@ import MYProductCard from "../ui/MYProductCard";
 import { CategorySettings } from "@/utils/slideSeetings";
 import { Button } from "antd";
 import { BsEye } from "react-icons/bs";
-import { useGetWomanProductFromDBQuery } from "@/redux/api/product/productApi";
+import { useGetAllWomanFashionQuery } from "@/redux/api/BannerApi/bannerApi";
 const WomenFashion = () => {
-  const { data, isLoading } = useGetWomanProductFromDBQuery({});
+  const { data, isLoading } = useGetAllWomanFashionQuery({});
   if (isLoading) {
     <h1>Loading...</h1>;
   }
@@ -34,7 +34,7 @@ const WomenFashion = () => {
       </div>
       <Slider {...CategorySettings}>
         {womanData?.map((data: any) => (
-          <MYProductCard key={data.id} womanData={data} />
+          <MYProductCard key={data.id} product={data} />
         ))}
       </Slider>
     </div>
