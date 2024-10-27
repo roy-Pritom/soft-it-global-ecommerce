@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React from "react";
-import { Button } from "antd";
+import React, { useState } from "react";
 import OrderProductSlider from "../orderComponents/OrderProductSlider";
 import { CgShoppingCart } from "react-icons/cg";
 import { MdAddShoppingCart } from "react-icons/md";
@@ -12,109 +12,80 @@ import {
   useGetAllProductQuery,
   useGetSingleProductQuery,
 } from "@/redux/api/product/productApi";
+import { Checkbox } from "antd";
 
 const OrderPage = ({ params }: { params: { orderId: string } }) => {
   const { orderId } = params;
-  // console.log(orderId);
   const { data } = useGetSingleProductQuery(orderId);
   const { data: allProductData } = useGetAllProductQuery({});
+  const [quantity, setQuantity] = useState(1);
+  const increaseQuantity = () => setQuantity(quantity + 1);
+  const decreaseQuantity = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
   const product = data?.data;
-  console.log(product);
+  console.log("Single Product:", product);
+
   return (
-    // <div className="container mx-auto py-20">
-    //   <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 ">
-    //     <div className="lg:col-span-1  lg:h-[35rem] lg:overflow-y-scroll flex lg:flex-col gap-2 order-2 lg:order-1">
-    //       {imgData?.map((item: any, index: number) => (
-    //         <Image
-    //           className={`${
-    //             imgurl === item?.img ? "opacity-50" : "opacity-100"
-    //           } cursor-pointer w-full rounded-md h-16 lg:h-44`}
-    //           onClick={() => setImgUrl(item?.img)}
-    //           key={index}
-    //           src={item.img}
-    //           width={300}
-    //           height={300}
-    //           alt="img"
-    //         />
-    //       ))}
-    //     </div>
-    //     <div className="lg:col-span-5 order-1 lg:order-2">
-    //       <OrderImageViewer imgurl={imgurl} />
-    //     </div>
-    //   </div>
-    //   <div className="grid grid-cols-4 mt-14">
-    //     <div className="col-span-3">
-    //       <p className="text-xl font-bold">
-    //         Fresh Instant Full Cream Milk Powder 1kg
-    //       </p>
-    //       <Descriptions title="User Info" items={items} />
-    //     </div>
-    //     <div className="col-span-1 bg-white p-8 rounded-md shadow-md space-y-3">
-    //       <p className="text-xl font-semibold text-slate-800">Details</p>
-    //       <p className="text-sm line-through">BDT 840</p>
-    //       <div className="flex justify-between">
-    //         <div className="">
-    //           <p className="text-lg md:text-xl font-bold mb-5">
-    //             BDT 800<span className="text-sm font-medium">.00</span>
-    //           </p>
-    //           <DynamicStarRating rating={3.5} />
-    //         </div>
-    //         <div className="">
-    //           <button className="px-4 py-1 rounded-full bg-green-400 text-white mx-auto text-xs font-semibold">
-    //             -BDT 40
-    //           </button>
-    //           <p className="mt-5">0 reviews</p>
-    //         </div>
-    //       </div>
-    //       <div className="flex flex-col gap-4">
-    //         <Button size="middle" className="w-1/2">
-    //           Stock : 50
-    //         </Button>
-    //         <Button size="large" type="primary" className="uppercase">
-    //           Add To Cart
-    //         </Button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="container mx-auto py-20">
       <div className="flex items-start gap-20">
         <div className="">
-          <OrderProductSlider />
+          <OrderProductSlider sliderPhotoData={product?.photo} />
         </div>
-        <div className="w-full ">
-          <p className="text-xl font-medium">Womens Saree S2</p>
+        <div className="w-full bg-gray-200 px-5 py-7 ">
+          <p className="text-xl font-medium">{product?.name}</p>
           <p className="text-xl font-medium mt-1">
-            2850 <span className="font-bold">Tk</span>
+            <span className="font-bold">Tk- </span>
+            {product?.price}
           </p>
-          <div className="flex flex-col gap-3 w-full mt-6 ">
-            <Button
-              size="large"
-              className="bg-[#ffc107] text-lg font-bold w-full py-6"
-              icon={<CgShoppingCart size={30} />}
+          <div className="mt-4 flex items-center gap-3">
+            <p className="text-lg font-semibold">Size:</p>
+            <Checkbox.Group
+              options={product?.size?.map((size: string) => ({
+                label: size,
+                value: size,
+              }))}
+              onChange={(checkedValues) =>
+                console.log("Selected sizes:", checkedValues)
+              }
+            />
+          </div>
+          <div className="flex items-center mt-3 ">
+            <button
+              onClick={decreaseQuantity}
+              className="px-3 py-1 bg-[#ccb864] text-white text-lg font-bold "
             >
+              -
+            </button>
+            <p className="px-4 py-1 text-lg font-medium border ">{quantity}</p>
+            <button
+              onClick={increaseQuantity}
+              className="px-3 py-1 bg-[#ccb864] text-white text-lg font-bold "
+            >
+              +
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-3 w-full mt-6 space-y-2 ">
+            <button className="bg-[#ccb864] text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2">
+              <CgShoppingCart size={25} />
               অর্ডার করুন
-            </Button>
-            <Button
-              size="large"
-              icon={<MdAddShoppingCart size={30} />}
-              className="bg-[#ffc107] text-lg font-bold w-full py-6"
-            >
+            </button>
+            <button className="bg-[#ccb864] text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2">
+              <MdAddShoppingCart size={25} />
               কার্টে রাখুন
-            </Button>
-            <Button
-              size="large"
-              icon={<IoCall size={25} color="white" />}
-              className="bg-[#00276C] text-lg font-bold w-full py-6 text-white"
-            >
+            </button>
+            <button className="bg-[#00276C] text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2">
+              <IoCall size={25} />
               01861714318
-            </Button>
+            </button>
           </div>
         </div>
       </div>
       <h2 className="text-xl font-bold py-12">Related Products</h2>
       <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-2 pb-12">
         {allProductData?.data?.data?.map((product: any) => (
+          //@ts-ignore
           <MYProductCard product={product} key={product?.id} />
         ))}
       </div>

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState, useRef } from "react";
 import { Swiper, SwiperSlide, Swiper as SwiperCore } from "swiper/react";
@@ -6,19 +8,9 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import Image from "next/image";
 
-const images = [
-  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
-];
-
-const OrderProductSlider: React.FC = () => {
+const OrderProductSlider = ({ sliderPhotoData }: { sliderPhotoData: any }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  //@ts-ignore
   const swiperRef = useRef<SwiperCore | null>(null);
 
   const handleThumbnailClick = (index: number) => {
@@ -39,22 +31,24 @@ const OrderProductSlider: React.FC = () => {
         modules={[Navigation]}
         className="w-full md:w-[592px]"
       >
-        {images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <Image
-              src={image}
-              loading="lazy"
-              width={592}
-              height={592}
-              alt={`Slide ${index + 1}`}
-              className="swiper-slide-image w-full md:w-[592px] h-auto"
-            />
+        {sliderPhotoData?.map((data: any) => (
+          <SwiperSlide key={data.id} className=" bg-gray-200">
+            <div className=" h-[400px]">
+              <Image
+                src={data?.img}
+                loading="lazy"
+                width={500}
+                height={500}
+                alt={`Slide ${data?.id}`}
+                className="swiper-slide-image w-full h-full"
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
       <div className="thumbnail-container">
-        {images.map((image, index) => (
+        {sliderPhotoData?.map((data: any, index: number) => (
           <button
             key={index}
             onClick={() => handleThumbnailClick(index)}
@@ -62,7 +56,13 @@ const OrderProductSlider: React.FC = () => {
               index === activeIndex ? "active" : ""
             }`}
           >
-            <img src={image} className="thumbnail-image" />
+            <Image
+              src={data?.img || "banner.png"}
+              alt=""
+              height={60}
+              width={60}
+              className="thumbnail-image h-24 w-24"
+            />
           </button>
         ))}
       </div>

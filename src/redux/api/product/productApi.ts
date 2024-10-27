@@ -1,7 +1,6 @@
 import { TagTypes } from "@/types/tagType";
 import { baseApi } from "../baseApi";
 
-// Define a service using a base URL and expected endpoints
 export const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProduct: builder.query({
@@ -22,9 +21,18 @@ export const productApi = baseApi.injectEndpoints({
       },
       providesTags: [TagTypes.product],
     }),
+    getWomanProductFromDB: builder.query({
+      query: () => ({
+        url: "/product/womanFashion",
+        method: "GET",
+      }),
+      providesTags: [TagTypes.product],
+    }),
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetAllProductQuery, useGetSingleProductQuery } = productApi;
+export const {
+  useGetAllProductQuery,
+  useGetSingleProductQuery,
+  useGetWomanProductFromDBQuery,
+} = productApi;
