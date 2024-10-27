@@ -10,14 +10,13 @@ const images = [
   "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
   "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
   "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
 ];
 
-const OrderProductSlider: React.FC = () => {
+type TProps = {
+  width: string;
+};
+
+const OrderProductSlider = ({ width = "592px" }: TProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef<SwiperCore | null>(null);
 
@@ -37,7 +36,7 @@ const OrderProductSlider: React.FC = () => {
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         navigation={true}
         modules={[Navigation]}
-        className="w-full md:w-[592px]"
+        className={`w-full md:w-[${width}]`}
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>

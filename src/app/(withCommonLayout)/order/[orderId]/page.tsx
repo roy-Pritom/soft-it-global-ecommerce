@@ -8,18 +8,18 @@ import { MdAddShoppingCart } from "react-icons/md";
 import { IoCall } from "react-icons/io5";
 import PolicyCard from "@/components/shared/PolicyCard";
 import MYProductCard from "@/components/ui/MYProductCard";
-import {
-  useGetAllProductQuery,
-  useGetSingleProductQuery,
-} from "@/redux/api/product/productApi";
+import { useGetSingleProductQuery } from "@/redux/api/product/productApi";
+import { useGetAllProductByCategoryQuery } from "@/redux/api/category/categoryApi";
 
 const OrderPage = ({ params }: { params: { orderId: string } }) => {
   const { orderId } = params;
   // console.log(orderId);
   const { data } = useGetSingleProductQuery(orderId);
-  const { data: allProductData } = useGetAllProductQuery({});
   const product = data?.data;
-  console.log(product);
+  const { data: allProductData } = useGetAllProductByCategoryQuery(
+    product?.categoryId
+  );
+  console.log(allProductData);
   return (
     // <div className="container mx-auto py-20">
     //   <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 ">
