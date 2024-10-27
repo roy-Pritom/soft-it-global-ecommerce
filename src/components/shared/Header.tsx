@@ -26,12 +26,12 @@ const Header = () => {
     <div className=" py-3 bg-[#F8F9FA]">
       <div className="flex justify-between items-center container mx-auto">
         <Link href="/">
-          <Image src="/logo.png" width={200} height={200} alt="logo" />
+          <Image src="/Logo/manio-logo.png" width={80} height={80} alt="logo" />
         </Link>
         <Search
-          className=" w-1/2 border rounded-lg custom-search"
+          className=" w-1/2 border border-gray-100 text-slate-600 rounded-md custom-search"
           size="large"
-          placeholder="Search"
+          placeholder="Searching..."
           onSearch={onSearch}
           enterButton
         />

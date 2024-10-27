@@ -16,7 +16,9 @@ const PopularCategory = () => {
   return (
     <div className="my-24 ">
       <Fade>
-        <p className="text-2xl font-bold mb-8 text-center">Popular Category</p>
+        <p className="text-2xl font-bold mb-8 text-center">
+          Popular Categories
+        </p>
       </Fade>
 
       <Slider {...CategorySettings}>

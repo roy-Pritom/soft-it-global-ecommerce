@@ -4,19 +4,19 @@
 
 /* styles.css */
 .custom-search ::placeholder {
-    color: black;
-    /* Tailwind red-500 */
-    opacity: 1;
-    /* Ensure the color is not transparent */
+  color: black;
+  /* Tailwind red-500 */
+  opacity: 1;
+  /* Ensure the color is not transparent */
 }
 
 .custom-search .ant-btn-primary {
-    background-color: #FFCA2C;
-    /* border-color: #FFCA2C; */
+  background-color: #ccb864;
+  /* border-color: #FFCA2C; */
 }
 
 .swiper {
-    width: 100%;
-    padding-top: 50px;
-    padding-bottom: 50px;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }

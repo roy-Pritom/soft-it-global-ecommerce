@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState, useRef } from "react";
 import { Swiper, SwiperSlide, Swiper as SwiperCore } from "swiper/react";
@@ -18,6 +20,7 @@ type TProps = {
 
 const OrderProductSlider = ({ width = "592px" }: TProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  //@ts-ignore
   const swiperRef = useRef<SwiperCore | null>(null);
 
   const handleThumbnailClick = (index: number) => {
@@ -46,14 +49,14 @@ const OrderProductSlider = ({ width = "592px" }: TProps) => {
               width={592}
               height={592}
               alt={`Slide ${index + 1}`}
-              className={`swiper-slide-image w-full md:w-[592px] h-auto`}
+              className={`swiper-slide-image w-full md:w-[${width}] h-auto`}
             />
           </SwiperSlide>
         ))}
       </Swiper>
 
       <div className="thumbnail-container">
-        {images.map((image, index) => (
+        {images?.map((image: any, index: number) => (
           <button
             key={index}
             onClick={() => handleThumbnailClick(index)}

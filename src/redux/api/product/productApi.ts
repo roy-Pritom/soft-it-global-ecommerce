@@ -1,7 +1,6 @@
 import { TagTypes } from "@/types/tagType";
 import { baseApi } from "../baseApi";
 
-// Define a service using a base URL and expected endpoints
 export const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProduct: builder.query({
