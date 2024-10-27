@@ -19,7 +19,7 @@ const OrderPage = ({ params }: { params: { orderId: string } }) => {
   const { data: allProductData } = useGetAllProductByCategoryQuery(
     product?.categoryId
   );
-  console.log(allProductData);
+  console.log("All product", allProductData);
   return (
     <div className="container mx-auto py-20">
       <div className="flex items-start gap-20">
