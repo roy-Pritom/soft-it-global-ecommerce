@@ -80,7 +80,7 @@ const OrderPage = ({ params }: { params: { orderId: string } }) => {
     <div className="container mx-auto py-20">
       <div className="flex items-start gap-20">
         <div className="">
-          <OrderProductSlider />
+          <OrderProductSlider width="592px" />
         </div>
         <div className="w-full ">
           <p className="text-xl font-medium">Womens Saree S2</p>

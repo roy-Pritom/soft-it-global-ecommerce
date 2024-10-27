@@ -1,32 +1,36 @@
 "use client";
 import OrderProductSlider from "@/app/(withCommonLayout)/order/orderComponents/OrderProductSlider";
-import { useGetSingleProductQuery } from "@/redux/api/product/productApi";
 import { Button, Modal, Radio } from "antd";
 import { useState } from "react";
+import QuantitySelector from "../shared/QuantitySelector";
 interface CartModalProps {
   isModalVisible: boolean;
   onClose: () => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  productId: any;
+  product: any;
   title: string;
+  isOrder?: boolean;
 }
 const ProductModal = ({
   isModalVisible,
   onClose,
-  productId,
+  product,
   title,
+  isOrder = false,
 }: CartModalProps) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  //   const { data } = useGetSingleProductQuery(productId);
-  const product = {};
-  console.log("p", productId);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSizeChange = (e: any) => {
     setSelectedSize(e.target.value);
   };
+
   return (
     <Modal
-      title={title}
+      title={
+        <div className="bg-yellow-300 px-4 py-2 rounded-md text-center font-bold">
+          {title}
+        </div>
+      }
       visible={isModalVisible}
       onCancel={onClose}
       width={800}
@@ -36,27 +40,51 @@ const ProductModal = ({
         </Button>,
       ]}
     >
-      <div className="flex items-center justify-between">
-        <div className="">
+      <div className="flex items-start justify-start gap-10">
+        {/* Product Image Slider */}
+        <div>
           <OrderProductSlider width="300px" />
         </div>
-        <div className="text-lg text-black">
-          <p className=" font-semibold">{product?.name}</p>
+
+        {/* Product Details */}
+        <div className="md:text-2xl text-lg text-black space-y-4 text-left">
+          <p className="font-semibold">{product?.name}</p>
           <p className="font-extrabold">{product?.price} TK</p>
-          <div className="">
-            <p className="font-semibold">Size :</p>
+
+          {/* Size Selection */}
+          <div className="flex items-center gap-2 space-y-0">
+            <p className="font-semibold">Size:</p>
             <Radio.Group
               onChange={handleSizeChange}
               value={selectedSize}
-              optionType="button"
-              buttonStyle="solid"
+              className="flex flex-wrap gap-2"
             >
               {product?.size?.map((size: string) => (
-                <Radio.Button key={size} value={size}>
+                <Radio key={size} value={size}>
                   {size}
-                </Radio.Button>
+                </Radio>
               ))}
             </Radio.Group>
+          </div>
+
+          {/* Quantity Selector and Add to Cart Button */}
+          <div className="flex justify-start items-center gap-3 mt-4">
+            <QuantitySelector />
+            {isOrder ? (
+              <Button
+                size="large"
+                className="text-[12px] bg-primaryColor text-black font-semibold"
+              >
+                অর্ডার করুন
+              </Button>
+            ) : (
+              <Button
+                size="large"
+                className="text-[12px] bg-[#00276C] text-white font-semibold"
+              >
+                কার্টে রাখুন
+              </Button>
+            )}
           </div>
         </div>
       </div>

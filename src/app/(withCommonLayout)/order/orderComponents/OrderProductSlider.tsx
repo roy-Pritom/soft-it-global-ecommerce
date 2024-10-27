@@ -46,7 +46,7 @@ const OrderProductSlider = ({ width = "592px" }: TProps) => {
               width={592}
               height={592}
               alt={`Slide ${index + 1}`}
-              className="swiper-slide-image w-full md:w-[592px] h-auto"
+              className={`swiper-slide-image w-full md:w-[592px] h-auto`}
             />
           </SwiperSlide>
         ))}
@@ -61,7 +61,13 @@ const OrderProductSlider = ({ width = "592px" }: TProps) => {
               index === activeIndex ? "active" : ""
             }`}
           >
-            <img src={image} className="thumbnail-image" />
+            <Image
+              src={image}
+              width={50}
+              height={50}
+              alt="img"
+              className="thumbnail-image"
+            />
           </button>
         ))}
       </div>

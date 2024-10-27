@@ -1,22 +1,27 @@
-import { Button, Modal } from "antd";
+import { Button } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import ProductModal from "../Modal/ProductModal";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MYProductCard = ({ product }: { product: any }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [productData, setProductData] = useState(product);
-  useEffect(() => {
-    setProductData(product); // Store product data on initial render
-  }, [product]);
+  const [isOrder, setIsOrder] = useState(false);
+  const productRef = useRef(product); // Use ref to hold product data
 
   const showModal = (event: React.MouseEvent) => {
     event.preventDefault(); // Prevent link navigation
     event.stopPropagation(); // Stop event propagation
     setIsModalVisible(true); // Show the modal
-    setProductData(product);
+    setIsOrder(false);
+  };
+  const showModal2 = (event: React.MouseEvent) => {
+    event.preventDefault(); // Prevent link navigation
+    event.stopPropagation(); // Stop event propagation
+    setIsModalVisible(true); // Show the modal
+    setIsOrder(true);
   };
 
   const handleCancel = () => {
@@ -51,6 +56,7 @@ const MYProductCard = ({ product }: { product: any }) => {
             </Button>
             <Button
               size="middle"
+              onClick={showModal2}
               className="text-[12px] bg-primaryColor text-black font-semibold"
             >
               অর্ডার করুন
@@ -62,8 +68,9 @@ const MYProductCard = ({ product }: { product: any }) => {
       {/* Antd Modal */}
       <ProductModal
         onClose={handleCancel}
+        isOrder={isOrder}
         isModalVisible={isModalVisible}
-        productId={productData?.id}
+        product={productRef.current}
         title="Choose Size and Color"
       />
     </>
