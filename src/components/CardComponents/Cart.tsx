@@ -1,11 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Checkbox, Image } from "antd";
-import { useGetTopProductQuery } from "@/redux/api/product/productApi";
-import { useState } from "react";
+import { useGetAllProductQuery } from "@/redux/api/product/productApi";
+import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { FaX } from "react-icons/fa6";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { RootState } from "@/redux/store";
+import { removeFromCart } from "@/redux/Slice/cartSlice";
 
-interface ProductData {
+export interface ProductData {
   categoryId: string;
   createdAt: string;
   discount: number;
@@ -21,7 +25,7 @@ interface ProductData {
   updateAt: string;
 }
 
-interface Photo {
+export interface Photo {
   id: string;
   img: string;
   isDeleted: boolean;
@@ -29,11 +33,22 @@ interface Photo {
 }
 
 const Cart = () => {
-  const { data, isLoading } = useGetTopProductQuery({});
+  const { data, isLoading } = useGetAllProductQuery({});
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
+  console.log("Quantity", quantities);
   const [selectedSizes, setSelectedSizes] = useState<{
     [key: string]: string[];
   }>({});
+
+  const dispatch = useAppDispatch();
+  const items = useAppSelector((state: RootState) => state.carts.items);
+  useEffect(() => {
+    const initialSizes: { [key: string]: string[] } = {};
+    data?.data?.data.forEach((product: ProductData) => {
+      initialSizes[product.id] = [product.size[0]];
+    });
+    setSelectedSizes(initialSizes);
+  }, [data]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -55,12 +70,15 @@ const Cart = () => {
     }));
   };
 
-  const productData: ProductData[] = data?.data || [];
-  console.log("Top Products", productData);
+  const productData: ProductData[] = data?.data?.data || [];
+  const productIdsInCart = items.map((item) => item.productId);
+  const cartsData = productData.filter((product: any) =>
+    productIdsInCart.includes(product.id)
+  );
 
   return (
     <div className="grid grid-cols-1 gap-4">
-      {productData.map((product: ProductData, index: number) => (
+      {cartsData.map((product: ProductData, index: number) => (
         <div
           className={index % 2 === 0 ? "bg-white p-2" : "bg-gray-100 p-2"}
           key={product.id}
@@ -125,7 +143,10 @@ const Cart = () => {
               </div>
             </div>
 
-            <div className="absolute top-0 -right-2 -mt-2 cursor-pointer">
+            <div
+              onClick={() => dispatch(removeFromCart(product?.id))}
+              className="absolute top-0 -right-2 -mt-2 cursor-pointer"
+            >
               <FaX size={16} className="text-red-600" />
             </div>
           </div>

@@ -10,8 +10,12 @@ import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
 import Image from "next/image";
 import { FaShoppingCart } from "react-icons/fa";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/Slice/cartSlice";
+import { toast } from "sonner";
 const Saree = () => {
   const { data, isLoading } = useGetTopProductQuery({});
+  const dispatch = useAppDispatch();
   if (isLoading) {
     <h1>Loading...</h1>;
   }
@@ -19,7 +23,8 @@ const Saree = () => {
   const topProductData = data?.data;
   console.log(topProductData);
   const handleAddToCartProduct = (id: string) => {
-    console.log("Clicked Id", id);
+    dispatch(addToCart(id));
+    toast.success("Added Successfully");
   };
 
   return (

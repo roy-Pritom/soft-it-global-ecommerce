@@ -10,17 +10,20 @@ import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
 import Image from "next/image";
 import { FaShoppingCart } from "react-icons/fa";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/Slice/cartSlice";
+import { toast } from "sonner";
 const WomenFashion = () => {
   const { data, isLoading } = useGetAllWomanFashionQuery({});
+  const dispatch = useAppDispatch();
   if (isLoading) {
     <h1>Loading...</h1>;
   }
 
   const womanData = data?.data;
-
   const handleAddToCart = (id: string) => {
-    console.log("Added to cart, Product ID:", id);
-    // Additional cart logic goes here
+    dispatch(addToCart(id));
+    toast.success("Added Successfully !");
   };
 
   return (

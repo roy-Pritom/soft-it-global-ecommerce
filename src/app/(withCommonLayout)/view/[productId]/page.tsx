@@ -42,7 +42,7 @@ const ProductViewPage = ({ params }: { params: ProductParams }) => {
   console.log("Now", relevantProductData);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 md:px-0 px-8">
       <div>
         <div className=" grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className=" bg-gray-100 w-full flex flex-col justify-center mx-auto overflow-hidden p-5">

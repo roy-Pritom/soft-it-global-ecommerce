@@ -11,7 +11,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   if (!isMounted) {
-    return <div>Loadinnhewjbwg...</div>;
+    return <div className=" text-center pt-3">Loading...</div>;
   }
 
   return (

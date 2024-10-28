@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
-import { Drawer, Button } from "antd";
+import { Drawer } from "antd";
 import { IoBagCheckOutline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 interface ReusableDrawerProps {
   visible: boolean;
@@ -15,6 +17,12 @@ const ReusableDrawer: React.FC<ReusableDrawerProps> = ({
   title,
   children,
 }) => {
+  const router = useRouter();
+  const handleCheckoutClick = () => {
+    onClose();
+    router.push("/checkouts");
+  };
+
   return (
     <Drawer
       title={title}
@@ -36,7 +44,7 @@ const ReusableDrawer: React.FC<ReusableDrawerProps> = ({
 
       {/* Fixed footer with full drawer width */}
       <div
-        className="bg-black w-full"
+        className="w-full"
         style={{
           position: "sticky",
           bottom: 0,
@@ -45,29 +53,32 @@ const ReusableDrawer: React.FC<ReusableDrawerProps> = ({
           padding: 0,
         }}
       >
-        <Button
-          onClick={onClose}
-          type="primary"
-          icon={<IoBagCheckOutline size={15} />}
-          style={{
-            flex: 2,
-            marginRight: "4px",
-            borderRadius: 0,
-          }}
-        >
-          Checkout
-        </Button>
-        <Button
-          onClick={onClose}
-          type="primary"
-          className="bg-red-400"
-          style={{
-            flex: 1,
-            borderRadius: 0,
-          }}
-        >
-          Close
-        </Button>
+        <div className="w-1/2">
+          <button
+            onClick={handleCheckoutClick}
+            className="bg-[#ccb864] w-full text-white flex items-center justify-center gap-2 py-2 px-4"
+            style={{
+              flex: 2,
+              marginRight: "4px",
+              borderRadius: 0,
+            }}
+          >
+            <IoBagCheckOutline size={15} />
+            Checkout
+          </button>
+        </div>
+        <div className=" w-1/2">
+          <button
+            onClick={onClose}
+            className="bg-red-600 w-full text-white py-2 px-4"
+            style={{
+              flex: 1,
+              borderRadius: 0,
+            }}
+          >
+            Close
+          </button>
+        </div>
       </div>
     </Drawer>
   );

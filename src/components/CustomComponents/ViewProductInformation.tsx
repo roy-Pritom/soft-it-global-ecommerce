@@ -1,15 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/Slice/cartSlice";
 import { Checkbox } from "antd";
 import React, { useState } from "react";
 import { FaMinus, FaPhone, FaPlus, FaShoppingCart } from "react-icons/fa";
+import { toast } from "sonner";
 
 const ViewProductInformation = ({ productData }: { productData: any }) => {
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [quantity, setQuantity] = useState<number>(1);
+  const dispatch = useAppDispatch();
 
   const handleSizeChange = (checkedValues: string[]) => {
     setSelectedSizes(checkedValues);
+  };
+
+  const handleAddToCartProduct = (productId: string) => {
+    dispatch(addToCart(productId));
+    toast.success("Add Successfully !");
+  };
+  const handleOrderToCartProduct = (productId: string) => {
+    dispatch(addToCart(productId));
+    toast.success("Add Successfully !");
   };
 
   return (
@@ -60,11 +73,17 @@ const ViewProductInformation = ({ productData }: { productData: any }) => {
         </Checkbox.Group>
       </div>
       <div className=" space-y-3 pt-6">
-        <button className="bg-[#ccb864]  w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3">
+        <button
+          onClick={() => handleAddToCartProduct(productData?.id)}
+          className="bg-[#ccb864]  w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
+        >
           {" "}
           অর্ডার করুন <FaShoppingCart />
         </button>
-        <button className="bg-[#ccb864] w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3">
+        <button
+          onClick={() => handleOrderToCartProduct(productData?.id)}
+          className="bg-[#ccb864] w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
+        >
           {" "}
           কার্টে রাখুন <FaShoppingCart />
         </button>

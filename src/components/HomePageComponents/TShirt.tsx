@@ -8,25 +8,27 @@ import { BsEye } from "react-icons/bs";
 import { useGetManFashionQuery } from "@/redux/api/product/productApi";
 import Link from "next/link";
 import Image from "next/image";
-import { Fade } from "react-awesome-reveal";
 import { FaShoppingCart } from "react-icons/fa";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/Slice/cartSlice";
+import { toast } from "sonner";
+import { Fade } from "react-awesome-reveal";
 
 const TShirt = () => {
+  const dispatch = useAppDispatch();
   const { data, isLoading } = useGetManFashionQuery({});
-
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
 
   const manFashionData = data?.data;
-
-  const handleAddToCartProduct = (id: string) => {
-    console.log("Clicked Id", id);
-    // Additional logic for adding the product to the cart can go here
+  const handleAddToCartProduct = (productId: string) => {
+    dispatch(addToCart(productId));
+    toast.success("Add Successfully");
   };
 
   return (
-    <div className="md:my-20 my-10">
+    <div className="md:my-20 my-10 md:px-0 px-8">
       <div className="bg-gray-100 p-10 rounded-md mb-14 flex justify-between">
         <p className="text-2xl sm:text-3xl md:text-3xl uppercase font-bold primaryColor">
           Man Fashion
@@ -51,9 +53,10 @@ const TShirt = () => {
                     alt="Product Image"
                     width={150}
                     height={230}
-                    className="mx-auto bg-[#E5E5E5] w-full h-[200px]"
+                    className="mx-auto bg-[#E5E5E5] w-full h-[300px] md:h-[200px]"
                   />
                 </Fade>
+
                 <p className="text-center text-sm font-medium mt-2">
                   {item.name}
                 </p>

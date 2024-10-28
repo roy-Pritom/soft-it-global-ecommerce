@@ -9,12 +9,16 @@ import { useState } from "react";
 import ReusableDrawer from "../ui/ReusableDrawer";
 import Cart from "../CardComponents/Cart";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { clearCart } from "@/redux/Slice/cartSlice";
+import { RootState } from "@/redux/store";
 type SearchProps = GetProps<typeof Input.Search>;
 const Header = () => {
   const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
     console.log(info?.source, value);
   const [visible, setVisible] = useState(false);
-
+  const dispatch = useAppDispatch();
+  const items = useAppSelector((state: RootState) => state.carts.items);
   const showDrawer = () => {
     setVisible(true);
   };
@@ -36,7 +40,14 @@ const Header = () => {
           enterButton
         />
         <div className="flex justify-center items-center gap-6">
+          <button
+            onClick={() => dispatch(clearCart())}
+            className=" bg-red-600 text-white px-4 py-1 "
+          >
+            Clear Cart
+          </button>
           <MdCall size={25} color="#00276C" />
+
           <p className="text-[#00276C] text-lg font-medium">01615597820</p>
           <div className="relative">
             <Button
@@ -46,7 +57,7 @@ const Header = () => {
               shape="circle"
               size="small"
             >
-              0
+              {items.length || 0}
             </Button>
             <FaBagShopping
               size={25}

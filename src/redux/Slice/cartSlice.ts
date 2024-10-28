@@ -21,6 +21,8 @@ const cartSlice = createSlice({
       const productIdToAdd = action.payload;
       if (!state.items.some((item) => item.productId === productIdToAdd)) {
         state.items.push({ productId: productIdToAdd });
+        console.log(`Product ${productIdToAdd} added to cart`);
+        console.log("Current cart state:", state.items);
       }
     },
 

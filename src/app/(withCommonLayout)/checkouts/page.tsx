@@ -1,11 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Select, Radio, Button, Tooltip } from "antd";
-import { useState } from "react";
-import QuantitySelector from "@/components/shared/QuantitySelector";
+import { Select, Radio, Checkbox } from "antd";
 import Image from "next/image";
-import { GiCrossMark } from "react-icons/gi";
+import { useAppSelector } from "@/redux/hooks";
+import { RootState } from "@/redux/store";
+import { useGetAllProductQuery } from "@/redux/api/product/productApi";
+import { useEffect, useState } from "react";
+import { FaMinus, FaPlus } from "react-icons/fa";
+
+interface ProductData {
+  categoryId: string;
+  createdAt: string;
+  discount: number;
+  id: string;
+  isDelete: boolean;
+  name: string;
+  photo: Photo[];
+  price: number;
+  size: string[];
+  sold: number;
+  totalProduct: number;
+  type: string;
+  updateAt: string;
+}
+
+interface Photo {
+  id: string;
+  img: string;
+  isDeleted: boolean;
+  productId: string;
+}
 
 type FormData = {
   name: string;
@@ -15,49 +41,51 @@ type FormData = {
   paymentMethod: string;
 };
 
-type CartItem = {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-};
-
 const CheckOutPage = () => {
+  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
+  const items = useAppSelector((state: RootState) => state.carts.items);
+  const [selectedSizes, setSelectedSizes] = useState<{
+    [key: string]: string[];
+  }>({});
+  const { data, isLoading } = useGetAllProductQuery({});
+  if (isLoading) {
+    <h1>Loading...</h1>;
+  }
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
 
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: 1,
-      name: "Womens Saree S3",
-      price: 10,
-      quantity: 1,
-      image: "path/to/image1.jpg",
-    },
-    {
-      id: 2,
-      name: "Womens Saree S2",
-      price: 20,
-      quantity: 1,
-      image: "path/to/image2.jpg",
-    },
-  ]);
+  const productData: ProductData[] = data?.data?.data || [];
+  const productIdsInCart = items.map((item) => item.productId);
+  const cartsData = productData.filter((product: any) =>
+    productIdsInCart.includes(product.id)
+  );
 
-  const handleQuantityChange = (id: number, newQuantity: number) => {
-    const updatedCartItems = cartItems.map((item) =>
-      item.id === id ? { ...item, quantity: newQuantity } : item
-    );
-    setCartItems(updatedCartItems);
+  const handleQuantityChange = (id: string, increment: boolean) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: increment
+        ? (prevQuantities[id] || 1) + 1
+        : Math.max((prevQuantities[id] || 1) - 1, 1),
+    }));
   };
 
-  const subtotal = cartItems.reduce(
-    (accumulator, item) => accumulator + item.price * item.quantity,
-    0
-  );
+  useEffect(() => {
+    const initialSizes: { [key: string]: string[] } = {};
+    data?.data?.data.forEach((product: ProductData) => {
+      initialSizes[product.id] = [product.size[0]];
+    });
+    setSelectedSizes(initialSizes);
+  }, [data]);
+
+  const handleSizeChange = (id: string, checkedValues: string[]) => {
+    setSelectedSizes((prevSelectedSizes) => ({
+      ...prevSelectedSizes,
+      [id]: checkedValues,
+    }));
+  };
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log("Form Submitted", data);
@@ -138,12 +166,11 @@ const CheckOutPage = () => {
 
       <div className="border p-6 rounded-md shadow-sm">
         <h2 className="text-xl font-semibold mb-4">
-          Cart - {cartItems.length} items
+          Cart - {cartsData.length || 0} items
         </h2>
         <table className="w-full text-left border-collapse">
           <thead>
             <tr>
-              <th className="border p-2">Remove</th>
               <th className="border p-2">Image</th>
               <th className="border p-2">Product Name</th>
               <th className="border p-2">Quantity</th>
@@ -151,33 +178,58 @@ const CheckOutPage = () => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((item) => (
+            {cartsData.map((item) => (
               <tr key={item.id}>
-                <td>
+                {/* <td>
                   <Tooltip title="remove item">
                     <Button icon={<GiCrossMark />} danger></Button>
                   </Tooltip>
-                </td>
+                </td> */}
                 <td className="border p-2">
                   <Image
                     width={64}
                     height={64}
-                    src="https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg"
+                    src={item.photo[0]?.img}
                     alt={item.name}
                     className="w-16 h-16 object-cover rounded"
                   />
                 </td>
                 <td className="border p-2">{item.name}</td>
                 <td className="border p-2">
-                  <QuantitySelector
-                    min={1}
-                    max={10}
-                    onChange={(newQuantity) =>
-                      handleQuantityChange(item.id, newQuantity)
-                    }
-                  />
+                  <div className=" space-y-2">
+                    <div className="flex items-center font-bold gap-4">
+                      <button
+                        className="bg-[#ccb864] h-6 w-6 rounded-full flex justify-center items-center"
+                        onClick={() => handleQuantityChange(item?.id, false)}
+                      >
+                        <FaMinus size={16} className="text-white font-bold" />
+                      </button>
+                      {quantities[item?.id] || 1}
+                      <button
+                        className="bg-[#ccb864] h-6 w-6 rounded-full flex justify-center items-center"
+                        onClick={() => handleQuantityChange(item?.id, true)}
+                      >
+                        <FaPlus size={16} className="text-white font-bold" />
+                      </button>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Checkbox.Group
+                        onChange={(checkedValues) =>
+                          handleSizeChange(item.id, checkedValues as string[])
+                        }
+                        value={selectedSizes[item.id] || []}
+                        className="flex flex-wrap gap-2"
+                      >
+                        {item.size.map((size) => (
+                          <Checkbox key={size} value={size}>
+                            {size}
+                          </Checkbox>
+                        ))}
+                      </Checkbox.Group>
+                    </div>
+                  </div>
                 </td>
-                <td className="border p-2">{item.price * item.quantity} ৳</td>
+                <td className="border p-2">Tk- {item.price} </td>
               </tr>
             ))}
           </tbody>
@@ -187,7 +239,7 @@ const CheckOutPage = () => {
           <div className="space-y-2 ">
             <div className="flex justify-between gap-20">
               <span>সাবটোটাল</span>
-              <span>{subtotal} ৳</span>
+              <span>0 ৳</span>
             </div>
             <div className="flex justify-between gap-20">
               <span>ডেলিভারি চার্জ</span>
@@ -195,7 +247,7 @@ const CheckOutPage = () => {
             </div>
             <div className="flex justify-between gap-20 font-semibold">
               <span>টোটাল</span>
-              <span>{subtotal} ৳</span>
+              <span>0 ৳</span>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/lib/Providres/Provider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +16,10 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en" data-theme="light">
-        <body>{children}</body>
+        <body>
+          <Toaster position="top-right" richColors />
+          {children}
+        </body>
       </html>
     </Providers>
   );
