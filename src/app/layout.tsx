@@ -14,13 +14,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Providers>
-      <html lang="en" data-theme="light">
-        <body>
+    <html lang="en" data-theme="light">
+      <body>
+        <Providers>
           <Toaster position="top-right" richColors />
           {children}
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+      </body>
+    </html>
   );
 }

@@ -13,15 +13,30 @@ import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/Slice/cartSlice";
 import { toast } from "sonner";
 import { Fade } from "react-awesome-reveal";
+import MYProductCardLoading from "./LazyLoadingComponents/MYProductCardLoading";
 
 const TShirt = () => {
   const dispatch = useAppDispatch();
   const { data, isLoading } = useGetManFashionQuery({});
+  const manFashionData = data?.data;
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="mt-10 w-full">
+        <div className="w-full h-40 bg-gray-300 animate-pulse rounded-md flex justify-between items-center px-5">
+          <h1 className="bg-gray-400 animate-pulse w-36 h-8 rounded-md"></h1>
+          <h1 className="bg-gray-400 animate-pulse w-24 h-10 rounded-md"></h1>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 w-full mt-10">
+          {Array(10)
+            .fill(1)
+            .map((_, index) => {
+              return <MYProductCardLoading key={index} />;
+            })}
+        </div>
+      </div>
+    );
   }
 
-  const manFashionData = data?.data;
   const handleAddToCartProduct = (productId: string) => {
     dispatch(addToCart(productId));
     toast.success("Add Successfully");
@@ -42,7 +57,7 @@ const TShirt = () => {
           See All
         </Button>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
         {manFashionData?.slice(0, 10).map((item: any) => (
           <div key={item.id} className="relative">
             <div className="bg-gray-100 border border-gray-100 p-2 rounded-md">
