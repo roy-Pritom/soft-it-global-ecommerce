@@ -17,7 +17,12 @@ const WomenFashion = () => {
   }
 
   const womanData = data?.data;
-  console.log("Woman Data", womanData);
+
+  const handleAddToCart = (id: string) => {
+    console.log("Added to cart, Product ID:", id);
+    // Additional cart logic goes here
+  };
+
   return (
     <div className="md:my-20 my-10">
       <div className="bg-gray-200 p-8 rounded-md mb-14 flex justify-between">
@@ -37,8 +42,8 @@ const WomenFashion = () => {
         {womanData?.slice(0, 10).map((item: any) => (
           <div key={item.id}>
             <Link href={`/view/${item.id}`}>
-              <div className="bg-gray-100 md:w-full w-[75%]  p-2 text-center border border-gray-100">
-                <div className=" relative ">
+              <div className="bg-gray-100 md:w-full w-[75%] p-2 text-center border border-gray-100">
+                <div className="relative">
                   <Fade>
                     <Image
                       src={item.photo ? item.photo[0]?.img : "/img2.jpg"}
@@ -48,7 +53,13 @@ const WomenFashion = () => {
                       className="mx-auto bg-[#E5E5E5] w-full h-[200px]"
                     />
                   </Fade>
-                  <div className="w-6 h-6 rounded-full absolute top-0 right-0 -mt-2 -mr-2 bg-[#ccb864] text-white flex items-center justify-center">
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddToCart(item.id);
+                    }}
+                    className="w-6 h-6 rounded-full absolute top-0 right-0 -mt-2 -mr-2 bg-[#ccb864] text-white flex items-center justify-center cursor-pointer"
+                  >
                     <FaShoppingCart className="text-sm" />
                   </div>
                 </div>

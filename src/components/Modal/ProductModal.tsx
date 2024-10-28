@@ -29,24 +29,19 @@ const ProductModal = ({
 
   return (
     <Modal
-      // title={
-      //   <div className="bg-yellow-300 px-4 py-2 rounded-md text-center font-bold">
-      //     {title}
-      //   </div>
-      // }
       visible={isModalVisible}
       onCancel={onClose}
       width={800}
       footer={false}
     >
-      <div className="flex flex-col md:flex-row items-stretch justify-start gap-10">
+      <div className=" w-full flex flex-col md:flex-row items-stretch justify-start gap-10">
         {/* Product Image Slider */}
-        <div className="flex-1">
+        <div className="flex-1 md:w-1/2 w-full">
           <OrderProductSlider product={product} width="300px" />
         </div>
 
         {/* Product Details */}
-        <div className="flex-1 md:text-2xl text-lg  space-y-4 text-left bg-gray-100 w-full p-3">
+        <div className="flex-1  md:w-1/2 w-full md:text-2xl text-lg  space-y-4 text-left bg-gray-100 p-3">
           <p className="font-semibold primaryColor">{product?.name}</p>
           <p className="font-semibold text-slate-800 ">Tk- {product?.price}</p>
           <div className="flex items-center gap-2">

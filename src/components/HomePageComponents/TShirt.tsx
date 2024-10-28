@@ -20,7 +20,7 @@ const TShirt = () => {
 
   const manFashionData = data?.data;
 
-  const handleAddToCardProduct = (id: string) => {
+  const handleAddToCartProduct = (id: string) => {
     console.log("Clicked Id", id);
     // Additional logic for adding the product to the cart can go here
   };
@@ -42,37 +42,33 @@ const TShirt = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
         {manFashionData?.slice(0, 10).map((item: any) => (
-          <div key={item.id}>
-            <Link href={`/view/${item.id}`}>
-              <div className="bg-gray-100 md:w-full w-[75%] p-2 text-center border border-gray-100">
-                <div className="relative">
-                  <Fade>
-                    <Image
-                      src={item.photo ? item.photo[0]?.img : "/img2.jpg"}
-                      alt="Product Image"
-                      width={150}
-                      height={230}
-                      className="mx-auto bg-[#E5E5E5] w-full h-[200px]"
-                    />
-                  </Fade>
-                  <div
-                    onClick={() => handleAddToCardProduct(item.id)}
-                    className="w-6 h-6 rounded-full absolute top-0 right-0 -mt-2 -mr-2 bg-[#ccb864] text-white flex items-center justify-center cursor-pointer"
-                  >
-                    <FaShoppingCart className="text-sm" />
-                  </div>
-                </div>
+          <div key={item.id} className="relative">
+            <div className="bg-gray-100 border border-gray-100 p-2 rounded-md">
+              <Link href={`/view/${item.id}`} className="text-center">
+                <Fade>
+                  <Image
+                    src={item.photo ? item.photo[0]?.img : "/img2.jpg"}
+                    alt="Product Image"
+                    width={150}
+                    height={230}
+                    className="mx-auto bg-[#E5E5E5] w-full h-[200px]"
+                  />
+                </Fade>
                 <p className="text-center text-sm font-medium mt-2">
                   {item.name}
                 </p>
                 <p className="my-3">Tk- {item.price}</p>
-                <div className="w-full pb-4">
-                  <button className="w-full flex justify-center items-center gap-3 bg-[#ccb864] text-white text-xs py-2 px-4 font-semibold">
-                    অর্ডার করুন <FaShoppingCart size={16} />
-                  </button>
-                </div>
-              </div>
-            </Link>
+                <button className="w-full flex justify-center items-center gap-3 bg-[#ccb864] text-white text-xs py-2 px-4 font-semibold">
+                  অর্ডার করুন <FaShoppingCart size={16} />
+                </button>
+              </Link>
+            </div>
+            <div
+              onClick={() => handleAddToCartProduct(item.id)}
+              className="absolute top-2 right-2 bg-[#ccb864] text-white p-2 rounded-full cursor-pointer shadow-lg"
+            >
+              <FaShoppingCart className="text-sm" />
+            </div>
           </div>
         ))}
       </div>

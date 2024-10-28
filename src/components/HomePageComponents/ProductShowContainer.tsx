@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import containerImg from "../../../public/Logo/container1.jpeg";
+import containerImgBag from "../../../public/Logo/Container3.png";
 
 const ProductShowContainer = () => {
   return (
@@ -14,15 +16,15 @@ const ProductShowContainer = () => {
                   className=" rounded-xl object-cover h-96"
                   width={300}
                   height={300}
-                  src="https://images.pexels.com/photos/1860160/pexels-photo-1860160.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  src={containerImg}
                   alt="about Us image"
                 />
               </div>
               <Image
                 width={300}
                 height={300}
-                className="sm:ml-0 ml-auto rounded-xl object-cover h-96"
-                src="https://images.pexels.com/photos/5650020/pexels-photo-5650020.jpeg?auto=compress&cs=tinysrgb&w=600"
+                className="sm:ml-0 ml-auto rounded-xl object-cover h-96 bg-gray-200"
+                src={containerImgBag}
                 alt="about Us image"
               />
             </div>
