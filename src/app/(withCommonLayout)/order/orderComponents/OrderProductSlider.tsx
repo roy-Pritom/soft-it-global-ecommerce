@@ -17,7 +17,7 @@ const OrderProductSlider = ({ product, width = "100%" }: TProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   //@ts-ignore
   const swiperRef = useRef<SwiperCore | null>(null);
-
+  console.log("l");
   const handleThumbnailClick = (index: number) => {
     setActiveIndex(index);
     if (swiperRef.current) {

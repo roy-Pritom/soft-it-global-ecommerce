@@ -5,10 +5,12 @@ export interface CartItem {
 
 interface CartState {
   items: CartItem[];
+  isData: string | null;
 }
 
 const initialState: CartState = {
   items: [],
+  isData: null,
 };
 
 const cartSlice = createSlice({
@@ -21,6 +23,12 @@ const cartSlice = createSlice({
         state.items.push({ productId: productIdToAdd });
       }
     },
+
+    setData: (state, action: PayloadAction<string>) => {
+      const data = action.payload;
+      state.isData = data;
+    },
+
     removeFromCart: (state, action: PayloadAction<string>) => {
       const productIdToRemove = action.payload;
       state.items = state.items.filter(
@@ -33,6 +41,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, setData } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
