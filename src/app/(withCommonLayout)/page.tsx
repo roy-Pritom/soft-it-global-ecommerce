@@ -16,7 +16,6 @@ export default function Home() {
       <PopularCategory />
       <FeatureProduct />
       <FeatureProductSlider />
-      {/* <MenProducts /> */}
       <TShirt />
       <WomenFashion />
       <Saree />

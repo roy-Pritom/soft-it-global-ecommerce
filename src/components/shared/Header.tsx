@@ -9,11 +9,16 @@ import { useState } from "react";
 import ReusableDrawer from "../ui/ReusableDrawer";
 import Cart from "../CardComponents/Cart";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 type SearchProps = GetProps<typeof Input.Search>;
 const Header = () => {
-  const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
-    console.log(info?.source, value);
   const [visible, setVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const router = useRouter();
+  const onSearch: SearchProps["onSearch"] = (value) => {
+    router.push(`/shop?searchTerm=${value}`);
+    setSearchTerm("");
+  };
 
   const showDrawer = () => {
     setVisible(true);
@@ -31,8 +36,10 @@ const Header = () => {
         <Search
           className=" w-1/2 border border-gray-100 text-slate-600 rounded-md custom-search"
           size="large"
-          placeholder="Searching..."
+          placeholder="Search"
           onSearch={onSearch}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           enterButton
         />
         <div className="flex justify-center items-center gap-6">
