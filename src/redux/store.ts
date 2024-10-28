@@ -32,8 +32,8 @@ const store = configureStore({
       },
     }).concat(baseApi.middleware),
 });
+export const persistor = persistStore(store);
+export default store;
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export const persistor = persistStore(store);
-export default store;
