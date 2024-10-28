@@ -205,6 +205,7 @@ const CheckOutPage = () => {
               <th className="border p-2">Product Name</th>
               <th className="border p-2">Quantity</th>
               <th className="border p-2">Price</th>
+              {/* hello */}
             </tr>
           </thead>
           <tbody>
