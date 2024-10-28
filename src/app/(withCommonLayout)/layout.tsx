@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="bg-[#F8F9FA] relative">
+    <div className="bg-white relative">
       <Header />
       <div className="grid grid-cols-4 container mx-auto">
         <div className="col-span-1">
@@ -15,10 +15,10 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         <div className="col-span-3">
           <div className="border-y flex items-center gap-4 pl-4 py-4">
             <Link href="/">
-              <p className="text-base font-bold text-primaryColor">HOME</p>
+              <p className="text-base font-bold primaryColor">HOME</p>
             </Link>
             <Link href="/shop">
-              <p className="text-base font-bold text-primaryColor">SHOP</p>
+              <p className="text-base font-bold primaryColor">SHOP</p>
             </Link>
           </div>
           {/* <BannerSlider /> */}

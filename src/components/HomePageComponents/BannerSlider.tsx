@@ -6,7 +6,6 @@ import Image from "next/image";
 
 const BannerSlider = () => {
   const { data, isLoading } = useGetAllBannerQuery({});
-
   if (isLoading) {
     return <h1 className="text-center pt-3">Loading...</h1>;
   }

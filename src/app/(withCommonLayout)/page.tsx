@@ -1,7 +1,7 @@
 import FeatureProduct from "@/components/HomePageComponents/FeatureProduct";
 import FeatureProductSlider from "@/components/HomePageComponents/FeatureProductSlider/FeatureProductSlider";
 import Hero from "@/components/HomePageComponents/Hero";
-import MenProducts from "@/components/HomePageComponents/MenProducts/MenProducts";
+// import MenProducts from "@/components/HomePageComponents/MenProducts/MenProducts";
 import ProductShowContainer from "@/components/HomePageComponents/ProductShowContainer";
 import PopularCategory from "@/components/HomePageComponents/ProductsTabs/PopularCategory/PopularCategory";
 import Saree from "@/components/HomePageComponents/Saree";
@@ -16,7 +16,7 @@ export default function Home() {
       <PopularCategory />
       <FeatureProduct />
       <FeatureProductSlider />
-      <MenProducts />
+      {/* <MenProducts /> */}
       <TShirt />
       <WomenFashion />
       <Saree />

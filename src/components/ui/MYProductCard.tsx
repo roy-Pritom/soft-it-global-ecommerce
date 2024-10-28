@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
@@ -7,6 +6,7 @@ import { Fade } from "react-awesome-reveal";
 import ProductModal from "../Modal/ProductModal";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const MYProductCard = ({ product }: { product: any }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isOrder, setIsOrder] = useState(false);
@@ -33,7 +33,7 @@ const MYProductCard = ({ product }: { product: any }) => {
     <>
       {/* Wrap the entire card in Link */}
       <Link href={`/order/${product?.id}`}>
-        <div className="bg-white md:w-full w-[75%] text-center border">
+        <div className="bg-gray-100 md:w-full w-[75%] text-center border border-gray-100">
           <Fade>
             <Image
               src={product?.photo ? product?.photo[0]?.img : "/img2.jpg"}
@@ -48,20 +48,18 @@ const MYProductCard = ({ product }: { product: any }) => {
           </p>
           <p className="my-3">{product?.price}tk</p>
           <div className="flex items-center justify-center pb-4 gap-1">
-            <Button
-              size="middle"
-              className="text-[12px] bg-[#00276C] text-white font-semibold"
-              onClick={showModal} // Open modal on button click
+            <button
+              className="text-xs bg-[#00276C] text-white font-semibold px-6 py-2 shadow-sm rounded-sm"
+              onClick={showModal}
             >
               কার্টে রাখুন
-            </Button>
-            <Button
-              size="middle"
+            </button>
+            <button
               onClick={showModal2}
-              className="text-[12px] bg-primaryColor text-black font-semibold"
+              className=" text-xs bg-[#ccb864] text-white font-semibold px-6 py-2 shadow-sm rounded-sm"
             >
               অর্ডার করুন
-            </Button>
+            </button>
           </div>
         </div>
       </Link>

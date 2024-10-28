@@ -1,56 +1,80 @@
 "use client";
+
 import Image from "next/image";
-import { products } from "./MenProducts/MenProducts";
-import ProductCard from "../ui/ProductCard";
-import { Carousel } from "antd";
 
 const ProductShowContainer = () => {
   return (
-    <div className="pb-10">
-      <div className="mb-10">
-        <Image
-          src="/b.gif"
-          alt="gif"
-          width={400}
-          height={200}
-          className="w-full h-[200px] rounded-md"
-          unoptimized={true}
-        />
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 ">
-        <div className="lg:col-span-3  lg:h-[20rem] lg:overflow-y-scroll flex lg:flex-col gap-2 order-2 lg:order-1">
-          <div className="grid grid-cols-2 gap-2">
-            {products?.map((item: any, index: number) => (
-              <ProductCard key={index} product={item} width="270px" />
-            ))}
+    <div>
+      <section className="py-24 relative">
+        <div className="w-full container  mx-auto md:px-0 px-8">
+          <div className="w-full justify-start items-center gap-12 grid lg:grid-cols-2 grid-cols-1">
+            <div className="w-full justify-center items-start gap-6 grid sm:grid-cols-2 grid-cols-1 lg:order-first order-last">
+              <div className="pt-24 lg:justify-center sm:justify-end justify-start items-start gap-2.5 flex">
+                <Image
+                  className=" rounded-xl object-cover h-96"
+                  width={300}
+                  height={300}
+                  src="https://images.pexels.com/photos/1860160/pexels-photo-1860160.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  alt="about Us image"
+                />
+              </div>
+              <Image
+                width={300}
+                height={300}
+                className="sm:ml-0 ml-auto rounded-xl object-cover h-96"
+                src="https://images.pexels.com/photos/5650020/pexels-photo-5650020.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="about Us image"
+              />
+            </div>
+            <div className="w-full flex-col justify-center lg:items-start items-center gap-10 inline-flex">
+              <div className="w-full flex-col justify-center items-start gap-8 flex">
+                <div className="w-full flex-col justify-start lg:items-start items-center gap-3 flex">
+                  <h2 className=" primaryColor text-4xl font-bold font-manrope leading-normal lg:text-start text-center">
+                    একসাথে সফলতার পথে এগিয়ে চলা
+                  </h2>
+                  <p className="text-gray-500 text-base font-normal leading-relaxed lg:text-start text-center">
+                    প্রতিটি প্রকল্প ছিল আমাদের এক যৌথ প্রচেষ্টা, যেখানে প্রত্যেক
+                    অংশগ্রহণকারী তাদের নিজস্ব অবদান রেখেছেন। একসাথে, আমরা
+                    শুধুমাত্র পণ্য তৈরি করি না, আমরা তৈরি করি দীর্ঘস্থায়ী
+                    সম্পর্ক, যা আমাদের সাফল্যের গল্প গড়ে তোলে।
+                  </p>
+                </div>
+                <div className="w-full lg:justify-start justify-center items-center sm:gap-10 gap-5 inline-flex">
+                  <div className="flex-col justify-start items-start inline-flex">
+                    <h3 className="text-gray-900 text-4xl font-bold font-manrope leading-normal">
+                      ৩+
+                    </h3>
+                    <h6 className="text-gray-500 text-base font-normal leading-relaxed">
+                      বছরের অভিজ্ঞতা
+                    </h6>
+                  </div>
+                  <div className="flex-col justify-start items-start inline-flex">
+                    <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal">
+                      ১২৫+
+                    </h4>
+                    <h6 className="text-gray-500 text-base font-normal leading-relaxed">
+                      সফল প্রকল্প
+                    </h6>
+                  </div>
+                  <div className="flex-col justify-start items-start inline-flex">
+                    <h4 className="text-gray-900 text-4xl font-bold font-manrope leading-normal">
+                      ৫২+
+                    </h4>
+                    <h6 className="text-gray-500 text-base font-normal leading-relaxed">
+                      খুশি গ্রাহক
+                    </h6>
+                  </div>
+                </div>
+              </div>
+              <button className="sm:w-fit w-full px-3.5 py-2 bg-[#ccb864] hover:bg-[#ccb864] transition-all duration-700 ease-in-out rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] justify-center items-center flex">
+                <span className="px-1.5 text-white text-sm font-medium leading-6">
+                  আরও পড়ুন
+                </span>
+              </button>
+            </div>
           </div>
         </div>
-        <div className="lg:col-span-3 order-1 lg:order-2">
-          <Carousel autoplay>
-            <Image
-              width={445}
-              height={445}
-              className="h-[20rem] w-full rounded-md"
-              src="/banner.jpg"
-              alt=""
-            />
-            <Image
-              width={445}
-              height={445}
-              className="h-[20rem] w-full rounded-md"
-              src="/banner1.webp"
-              alt=""
-            />
-            <Image
-              width={445}
-              height={445}
-              className="h-[20rem] w-full rounded-md"
-              src="/banner.jpg"
-              alt=""
-            />
-          </Carousel>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };

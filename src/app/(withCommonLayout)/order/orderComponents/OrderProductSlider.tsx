@@ -8,17 +8,12 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import Image from "next/image";
 
-const images = [
-  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/b21721127597.jpg",
-  "https://r.softitglobal.xyz//posadmin/images/product/large/s31728711689.jpg",
-];
-
 type TProps = {
-  width: string;
+  product: any;
+  width?: string;
 };
 
-const OrderProductSlider = ({ width = "592px" }: TProps) => {
+const OrderProductSlider = ({ product, width = "100%" }: TProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   //@ts-ignore
   const swiperRef = useRef<SwiperCore | null>(null);
@@ -41,22 +36,24 @@ const OrderProductSlider = ({ width = "592px" }: TProps) => {
         modules={[Navigation]}
         className={`w-full md:w-[${width}]`}
       >
-        {images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <Image
-              src={image}
-              loading="lazy"
-              width={592}
-              height={592}
-              alt={`Slide ${index + 1}`}
-              className={`swiper-slide-image w-full md:w-[${width}] h-auto`}
-            />
+        {product?.photo?.map((data: any, index: number) => (
+          <SwiperSlide key={index} className=" bg-gray-100">
+            <div className=" h-96">
+              <Image
+                src={data?.img}
+                loading="lazy"
+                width={500}
+                height={500}
+                alt={`Slide ${index + 1}`}
+                className={`swiper-slide-image object-cover w-full h-full`}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
       <div className="thumbnail-container">
-        {images?.map((image: any, index: number) => (
+        {product?.photo?.map((data: any, index: number) => (
           <button
             key={index}
             onClick={() => handleThumbnailClick(index)}
@@ -65,7 +62,7 @@ const OrderProductSlider = ({ width = "592px" }: TProps) => {
             }`}
           >
             <Image
-              src={image}
+              src={data?.img}
               width={50}
               height={50}
               alt="img"

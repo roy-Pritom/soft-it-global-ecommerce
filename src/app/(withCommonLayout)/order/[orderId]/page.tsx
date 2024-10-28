@@ -22,11 +22,11 @@ const OrderPage = ({ params }: { params: { orderId: string } }) => {
   console.log("All product", allProductData);
   return (
     <div className="container mx-auto py-20">
-      <div className="flex items-start gap-20">
-        <div className="">
-          <OrderProductSlider width="592px" />
+      <div className="flex gap-12 ">
+        <div className=" w-full sm:w-1/2 md:w-1/2 bg-gray-100">
+          <OrderProductSlider product={product} width="600px" />
         </div>
-        <div className="w-full ">
+        <div className="w-full  sm:w-1/2 md:w-1/2 bg-gray-100 py-12 px-4">
           <p className="text-xl font-medium">Womens Saree S2</p>
           <p className="text-xl font-medium mt-1">
             <span className="font-bold">Tk- </span>
@@ -62,7 +62,7 @@ const OrderPage = ({ params }: { params: { orderId: string } }) => {
         </div>
       </div>
       <h2 className="text-xl font-bold py-12">Related Products</h2>
-      <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-1 gap-2 pb-12">
+      <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-2 pb-12">
         {allProductData?.data?.data?.map((product: any) => (
           //@ts-ignore
           <MYProductCard product={product} key={product?.id} />

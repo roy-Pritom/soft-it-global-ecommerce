@@ -19,7 +19,7 @@ const menuItems = [
 ];
 const menu = (
   <Menu
-    className="h-[450px] rounded-none"
+    className="h-[450px] rounded-none shadow-none"
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     items={menuItems?.map((item: any) => ({
       key: item.key,
@@ -42,7 +42,6 @@ const NavMenu = () => {
   const router = useRouter();
   useEffect(() => {
     const currentPath = window.location.pathname;
-    // console.log(currentPath);
     if (currentPath === "/") {
       setDropdownVisible(true); // Show dropdown on home page
     } else {
@@ -50,9 +49,7 @@ const NavMenu = () => {
     }
   }, [router]);
 
-  // Handle dropdown visibility on hover
   const handleVisibleChange = (visible: boolean) => {
-    //   console.log(visible);
     if (window.location.pathname !== "/") {
       setDropdownVisible(visible);
     }
@@ -60,21 +57,21 @@ const NavMenu = () => {
   return (
     <div>
       <Dropdown
-        className="py-[13.7px]"
+        className="py-[13.7px] shadow-sm border-none"
         overlay={menu}
         trigger={["hover"]}
         placement="bottom"
         visible={dropdownVisible}
         onVisibleChange={handleVisibleChange}
       >
-        <div className="bg-primaryColor  flex justify-between px-4 items-center cursor-pointer">
+        <div className="bg-[#ccb864]  flex justify-between px-4 items-center cursor-pointer">
           <div className="flex items-center gap-3">
-            <FaBars />
-            <p className="text-black font-semibold text-base">
+            <FaBars className=" text-white" />
+            <p className=" text-white font-semibold text-base">
               BROWSE CATEGORIES
             </p>
           </div>
-          <RiArrowDropDownLine size={30} />
+          <RiArrowDropDownLine size={30} className=" text-white" />
         </div>
       </Dropdown>
     </div>

@@ -1,18 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/mousewheel";
-
 import styles from "./FeatureProductSlider.module.css";
 import { Autoplay, Mousewheel, Pagination } from "swiper/modules";
 import Image from "next/image";
+import { useGetAllBannerQuery } from "@/redux/api/BannerApi/bannerApi";
 
-// import required modules
 const FeatureProductSlider = () => {
+  const { data, isLoading } = useGetAllBannerQuery({});
+  if (isLoading) {
+    return <h1 className="text-center pt-3">Loading...</h1>;
+  }
+
+  const bannerData = data?.data?.data || [];
   return (
     <>
       <Swiper
@@ -30,25 +33,19 @@ const FeatureProductSlider = () => {
         modules={[Mousewheel, Pagination, Autoplay]}
         className={styles.swiper}
       >
-        <SwiperSlide className={styles.swiperSlide}>
-          <Image
-            width={800}
-            height={445}
-            className="h-[445px] w-full border border-red-500"
-            src="/banner.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className={styles.swiperSlide}>
-          <Image
-            width={445}
-            height={445}
-            className="h-[445px] w-full"
-            src="/banner.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className={styles.swiperSlide}>
+        {bannerData?.map((data: any) => (
+          <SwiperSlide className={styles.swiperSlide} key={data.id}>
+            <Image
+              width={445}
+              height={445}
+              className="h-[445px] w-full"
+              src={data?.img}
+              alt=""
+            />
+          </SwiperSlide>
+        ))}
+
+        {/* <SwiperSlide className={styles.swiperSlide}>
           <Image
             width={445}
             height={445}
@@ -56,7 +53,7 @@ const FeatureProductSlider = () => {
             src="/banner1.webp"
             alt=""
           />
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
     </>
   );

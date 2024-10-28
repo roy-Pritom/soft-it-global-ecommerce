@@ -23,7 +23,7 @@ const Header = () => {
     setVisible(false);
   };
   return (
-    <div className=" py-3 bg-[#F8F9FA]">
+    <div className=" py-3 bg-gray-100">
       <div className="flex justify-between items-center container mx-auto">
         <Link href="/">
           <Image src="/Logo/manio-logo.png" width={80} height={80} alt="logo" />

@@ -48,15 +48,21 @@ export const productApi = baseApi.injectEndpoints({
       },
       providesTags: [TagTypes.product],
     }),
+    getManFashion: builder.query({
+      query: () => ({
+        url: "/product/manFashion",
+        method: "GET",
+      }),
+      providesTags: [TagTypes.product],
+    }),
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const {
   useGetAllProductQuery,
   useGetSingleProductQuery,
   useGetNewProductQuery,
   useGetTopProductQuery,
   useGetDiscountProductQuery,
+  useGetManFashionQuery,
 } = productApi;

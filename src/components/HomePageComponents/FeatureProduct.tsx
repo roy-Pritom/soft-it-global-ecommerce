@@ -4,15 +4,11 @@ import NewTab from "./ProductsTabs/NewTab";
 import TopProductTab from "./ProductsTabs/TopProductTab";
 import DiscountSaleProductTab from "./ProductsTabs/DiscountSaleProductTab";
 
-// const onChange = (key: string) => {
-//   console.log(key);
-// };
-
 const items: TabsProps["items"] = [
   {
     key: "1",
     label: (
-      <span className="flex items-center gap-2 text-lg font-bold">NEW</span>
+      <span className="flex items-center gap-2 text-lg font-bold ">NEW</span>
     ),
     children: <NewTab />,
   },
