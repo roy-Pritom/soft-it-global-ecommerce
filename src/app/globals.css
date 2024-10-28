@@ -7,7 +7,6 @@
   color: black;
   /* Tailwind red-500 */
   opacity: 1;
-  /* Ensure the color is not transparent */
 }
 
 .custom-search .ant-btn-primary {

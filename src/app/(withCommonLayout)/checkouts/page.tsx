@@ -88,7 +88,7 @@ const CheckOutPage = () => {
   };
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form Submitted", data);
+    console.log("Form", data);
   };
 
   return (
