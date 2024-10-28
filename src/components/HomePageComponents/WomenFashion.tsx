@@ -13,14 +13,29 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/Slice/cartSlice";
 import { toast } from "sonner";
+import MYProductCardLoading from "./LazyLoadingComponents/MYProductCardLoading";
 const WomenFashion = () => {
   const { data, isLoading } = useGetAllWomanFashionQuery({});
+  const womanData = data?.data || [];
   const dispatch = useAppDispatch();
   if (isLoading) {
-    <h1>Loading...</h1>;
+    return (
+      <div className="">
+        <div className="w-full h-40 bg-gray-300 animate-pulse rounded-md flex justify-between items-center px-5">
+          <h1 className="bg-gray-400 animate-pulse w-36 h-8 rounded-md"></h1>
+          <h1 className="bg-gray-400 animate-pulse w-24 h-10 rounded-md"></h1>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 w-full mt-10">
+          {Array(10)
+            .fill(1)
+            .map((_, index) => {
+              return <MYProductCardLoading key={index} />;
+            })}
+        </div>
+      </div>
+    );
   }
 
-  const womanData = data?.data;
   const handleAddToCart = (id: string) => {
     dispatch(addToCart(id));
     toast.success("Added Successfully !");
@@ -41,7 +56,7 @@ const WomenFashion = () => {
           See All
         </Button>
       </div>
-      <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 ">
         {womanData?.slice(0, 10).map((item: any) => (
           <div key={item.id}>
             <Link href={`/view/${item.id}`}>
