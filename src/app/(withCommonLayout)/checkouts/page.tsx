@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Select, Radio, Checkbox } from "antd";
+import { Button, Checkbox, Select, Tooltip } from "antd";
 import Image from "next/image";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { useGetAllProductQuery } from "@/redux/api/product/productApi";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { GiCrossMark } from "react-icons/gi";
 
 interface ProductData {
   categoryId: string;
@@ -35,10 +37,9 @@ interface Photo {
 
 type FormData = {
   name: string;
-  phone: string;
+  contact: string;
   address: string;
-  shipping: string;
-  paymentMethod: string;
+  deliveryCharge: string;
 };
 
 const CheckOutPage = () => {
@@ -47,15 +48,23 @@ const CheckOutPage = () => {
   const [selectedSizes, setSelectedSizes] = useState<{
     [key: string]: string[];
   }>({});
+
   const { data, isLoading } = useGetAllProductQuery({});
   if (isLoading) {
     <h1>Loading...</h1>;
   }
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+    watch,
+    setValue,
+  } = useForm<FormData>({
+    defaultValues: {
+      deliveryCharge: "60",
+    },
+  });
 
   const productData: ProductData[] = data?.data?.data || [];
   const productIdsInCart = items.map((item) => item.productId);
@@ -74,7 +83,7 @@ const CheckOutPage = () => {
 
   useEffect(() => {
     const initialSizes: { [key: string]: string[] } = {};
-    data?.data?.data.forEach((product: ProductData) => {
+    data?.data?.data?.forEach((product: ProductData) => {
       initialSizes[product.id] = [product.size[0]];
     });
     setSelectedSizes(initialSizes);
@@ -87,8 +96,34 @@ const CheckOutPage = () => {
     }));
   };
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form", data);
+  const subtotal = useMemo(() => {
+    return cartsData.reduce((total, item) => {
+      const quantity = quantities[item.id] || 1;
+      return total + item.price * quantity;
+    }, 0);
+  }, [cartsData, quantities]);
+
+  const deliveryCharge = Number(watch("deliveryCharge"));
+  const totalPrice = subtotal + deliveryCharge;
+
+  const onSubmit = async (data: any) => {
+    const orderUserData = {
+      deliveryCharge: deliveryCharge,
+      name: data.name,
+      contact: data.contact,
+      address: data.address,
+      totalPrice: totalPrice,
+    };
+    const productOrderData = cartsData.map((data: any) => ({
+      productId: data.id,
+      quantity: quantities[data.id] || 1,
+      size: selectedSizes[data.id] || data.sizes[0] || "N/A",
+    }));
+    const confirmOrderData = {
+      ...orderUserData,
+      productOrderData,
+    };
+    console.log("productOrderData", confirmOrderData);
   };
 
   return (
@@ -117,10 +152,10 @@ const CheckOutPage = () => {
           <input
             type="text"
             placeholder="আপনার মোবাইল নাম্বার লিখুন"
-            {...register("phone", { required: true })}
+            {...register("contact", { required: true })}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
-          {errors.phone && (
+          {errors.contact && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
@@ -143,17 +178,13 @@ const CheckOutPage = () => {
           <label className="block font-medium mb-1">ডেলিভারি চার্জ</label>
           <Select
             className="w-full"
-            {...register("shipping", { required: true })}
-            options={[{ value: "Free Shipping", label: "Free Shipping" }]}
+            value={watch("deliveryCharge")}
+            onChange={(value) => setValue("deliveryCharge", value)}
+            options={[
+              { value: "60", label: "ঢাকার ভিতরে (৬০ Tk)" },
+              { value: "120", label: "ঢাকার বাহিরে (১২০ Tk)" },
+            ]}
           />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Payment Method</label>
-          <Radio.Group {...register("paymentMethod", { required: true })}>
-            <Radio value="COD">Cash On Delivery</Radio>
-            <Radio value="Bkash">Bkash</Radio>
-          </Radio.Group>
         </div>
 
         <button
@@ -163,7 +194,6 @@ const CheckOutPage = () => {
           অর্ডার কনফার্ম করুন
         </button>
       </form>
-
       <div className="border p-6 rounded-md shadow-sm">
         <h2 className="text-xl font-semibold mb-4">
           Cart - {cartsData.length || 0} items
@@ -180,11 +210,6 @@ const CheckOutPage = () => {
           <tbody>
             {cartsData.map((item) => (
               <tr key={item.id}>
-                {/* <td>
-                  <Tooltip title="remove item">
-                    <Button icon={<GiCrossMark />} danger></Button>
-                  </Tooltip>
-                </td> */}
                 <td className="border p-2">
                   <Image
                     width={64}
@@ -229,7 +254,19 @@ const CheckOutPage = () => {
                     </div>
                   </div>
                 </td>
-                <td className="border p-2">Tk- {item.price} </td>
+                <td className="border p-2">
+                  <div className="flex justify-between items-start">
+                    <h1>Tk- {item.price * (quantities[item.id] || 1)}</h1>
+                    <Tooltip title="Delete">
+                      <Button
+                        size="small"
+                        icon={<GiCrossMark size={15} />}
+                        danger
+                        className="ml-2"
+                      />
+                    </Tooltip>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -239,15 +276,15 @@ const CheckOutPage = () => {
           <div className="space-y-2 ">
             <div className="flex justify-between gap-20">
               <span>সাবটোটাল</span>
-              <span>0 ৳</span>
+              <span>{subtotal} ৳</span>
             </div>
             <div className="flex justify-between gap-20">
               <span>ডেলিভারি চার্জ</span>
-              <span>0 ৳</span>
+              <span>{deliveryCharge} ৳</span>
             </div>
             <div className="flex justify-between gap-20 font-semibold">
               <span>টোটাল</span>
-              <span>0 ৳</span>
+              <span>{totalPrice} ৳</span>
             </div>
           </div>
         </div>
