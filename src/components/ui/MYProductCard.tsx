@@ -10,53 +10,52 @@ import ProductModal from "../Modal/ProductModal";
 const MYProductCard = ({ product }: { product: any }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isOrder, setIsOrder] = useState(false);
-  const productRef = useRef(product); // Use ref to hold product data
+  const productRef = useRef(product);
 
   const showModal = (event: React.MouseEvent) => {
-    event.preventDefault(); // Prevent link navigation
-    event.stopPropagation(); // Stop event propagation
-    setIsModalVisible(true); // Show the modal
+    event.preventDefault();
+    event.stopPropagation();
+    setIsModalVisible(true);
     setIsOrder(false);
   };
   const showModal2 = (event: React.MouseEvent) => {
-    event.preventDefault(); // Prevent link navigation
-    event.stopPropagation(); // Stop event propagation
-    setIsModalVisible(true); // Show the modal
+    event.preventDefault();
+    event.stopPropagation();
+    setIsModalVisible(true);
     setIsOrder(true);
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false); // Hide the modal
+    setIsModalVisible(false);
   };
 
   return (
-    <>
-      {/* Wrap the entire card in Link */}
+    <div className=" w-full ">
       <Link href={`/order/${product?.id}`}>
-        <div className="bg-gray-100 md:w-full w-[75%] text-center border border-gray-100">
+        <div className="bg-gray-100 md:w-full w-full text-center border border-gray-100 px-2">
           <Fade>
             <Image
               src={product?.photo ? product?.photo[0]?.img : "/img2.jpg"}
               alt="img1"
               width={150}
               height={230}
-              className="mx-auto bg-[#E5E5E5] w-full h-[200px]"
+              className="mx-auto bg-[#E5E5E5] w-full h-[280px] md:h-[200px]"
             />
           </Fade>
           <p className="text-center text-sm font-medium mt-2">
             {product?.name}
           </p>
           <p className="my-3">{product?.price}tk</p>
-          <div className="flex items-center justify-center pb-4 gap-1">
+          <div className="flex w-full items-center justify-center pb-4 gap-1">
             <button
-              className="text-xs bg-[#00276C] text-white font-semibold px-6 py-2 shadow-sm rounded-sm"
+              className="text-xs w-full  bg-[#00276C] text-white font-semibold px-4 py-2 shadow-sm rounded-sm"
               onClick={showModal}
             >
               কার্টে রাখুন
             </button>
             <button
               onClick={showModal2}
-              className=" text-xs bg-[#ccb864] text-white font-semibold px-6 py-2 shadow-sm rounded-sm"
+              className=" text-xs w-full bg-[#ccb864] text-white font-semibold px-4 py-2 shadow-sm rounded-sm"
             >
               অর্ডার করুন
             </button>
@@ -72,7 +71,7 @@ const MYProductCard = ({ product }: { product: any }) => {
         product={productRef.current}
         title="Choose Size and Color"
       />
-    </>
+    </div>
   );
 };
 

@@ -43,24 +43,26 @@ const Saree = () => {
   };
 
   return (
-    <div className="md:my-20 my-10">
+    <div className="md:my-20 my-10 md:px-0 px-8">
       <div className="bg-gray-100 p-10 rounded-md mb-14 flex justify-between">
         <p className="text-2xl sm:text-3xl md:text-3xl primaryColor uppercase font-bold">
           Top Product
         </p>
-        <Button
-          size="large"
-          className="font-semibold uppercase bg-[#ccb864] text-white"
-          shape="round"
-          icon={<BsEye />}
-        >
-          See All
-        </Button>
+        <Link href="/product?topProduct">
+          <Button
+            size="large"
+            className="font-semibold uppercase bg-[#ccb864] text-white"
+            shape="round"
+            icon={<BsEye />}
+          >
+            See All
+          </Button>
+        </Link>
       </div>
       <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
         {topProductData?.slice(0, 5).map((item: any) => (
           <div key={item.id} className=" relative ">
-            <div className="bg-gray-100 md:w-full w-[75%]  p-2 text-center border border-gray-100">
+            <div className="bg-gray-100 w-full   p-2 text-center border border-gray-100">
               <Link href={`/view/${item.id}`}>
                 <Fade>
                   <Image
@@ -68,7 +70,7 @@ const Saree = () => {
                     alt="Product Image"
                     width={150}
                     height={230}
-                    className="mx-auto bg-[#E5E5E5] w-full h-[200px]"
+                    className="mx-auto bg-[#E5E5E5] w-full h-[300px] md:h-[200px]"
                   />
                 </Fade>
 

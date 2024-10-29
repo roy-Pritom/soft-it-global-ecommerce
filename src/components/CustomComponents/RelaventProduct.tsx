@@ -19,7 +19,7 @@ const RelaventProduct = ({
         {relevantProductData?.map((data: any) => (
           <div key={data.id}>
             <Link href={`/view/${data.id}`}>
-              <div className="bg-gray-100 md:w-full w-[75%]  p-2 text-center border border-gray-100">
+              <div className="bg-gray-100 w-full   p-2 text-center border border-gray-100">
                 <div className=" relative ">
                   <Fade>
                     <Image
@@ -27,7 +27,7 @@ const RelaventProduct = ({
                       alt="Product Image"
                       width={150}
                       height={230}
-                      className="mx-auto bg-[#E5E5E5] w-full h-[200px]"
+                      className="mx-auto bg-[#E5E5E5] w-full h-[300px] md:h-[200px]"
                     />
                   </Fade>
                   <div className="w-6 h-6 rounded-full absolute top-0 right-0 -mt-2 -mr-2 bg-[#ccb864] text-white flex items-center justify-center">

@@ -26,7 +26,7 @@ const ShopPage = ({ params }: TProps) => {
   const currentItems = products?.slice(startIdx, startIdx + itemsPerPage);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 md:px-0 px-8">
       <div className="grid md:grid-cols-3 lg:grid-cols-5 grid-cols-1 gap-2  justify-items-center content-center">
         {currentItems?.map((product: any) => (
           <MYProductCard key={product.id} product={product} />

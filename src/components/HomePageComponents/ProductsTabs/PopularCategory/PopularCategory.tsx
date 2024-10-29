@@ -26,7 +26,7 @@ const PopularCategory = () => {
     );
   }
   return (
-    <div className="my-24 ">
+    <div className="my-24 md:px-0 px-8">
       <Fade>
         <p className="text-2xl font-bold mb-8 text-center primaryColor">
           Popular Categories

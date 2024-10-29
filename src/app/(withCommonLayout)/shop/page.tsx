@@ -32,13 +32,13 @@ const ShopPage = ({ params }: TProps) => {
   }
   const productData = data?.data?.data || [];
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
 
   const startIdx = (currentPage - 1) * itemsPerPage;
   const currentItems = productData?.slice(startIdx, startIdx + itemsPerPage);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 md:px-0 px-8">
       <div className="grid md:grid-cols-3 lg:grid-cols-5 grid-cols-1 gap-2  justify-items-center content-center">
         {currentItems?.map((product: any, index: number) => (
           <MYProductCard key={index} product={product} />

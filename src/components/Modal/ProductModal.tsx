@@ -5,6 +5,9 @@ import { Button, Checkbox, Modal, Radio } from "antd";
 import { useState } from "react";
 import QuantitySelector from "../shared/QuantitySelector";
 import { FaMinus, FaPhone, FaPlus, FaShoppingCart } from "react-icons/fa";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/Slice/cartSlice";
+import { toast } from "sonner";
 interface CartModalProps {
   isModalVisible: boolean;
   onClose: () => void;
@@ -22,9 +25,17 @@ const ProductModal = ({
 }: CartModalProps) => {
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [quantity, setQuantity] = useState<number>(1);
-
+  const dispatch = useAppDispatch();
   const handleSizeChange = (checkedValues: string[]) => {
     setSelectedSizes(checkedValues);
+  };
+  const handleAddToCartProduct = (id: string) => {
+    dispatch(addToCart(id));
+    toast.success("Added Successfully !");
+  };
+  const handleAddToOrderProduct = (id: string) => {
+    dispatch(addToCart(id));
+    toast.success("Added Successfully !");
   };
 
   return (
@@ -88,12 +99,18 @@ const ProductModal = ({
           {/* Quantity Selector and Add to Cart Button */}
           <div className="flex flex-col gap-4 w-full">
             {isOrder ? (
-              <button className="bg-[#ccb864] text-sm  w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3">
+              <button
+                onClick={() => handleAddToOrderProduct(product?.id)}
+                className="bg-[#ccb864] text-sm  w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
+              >
                 {" "}
                 অর্ডার করুন <FaShoppingCart />
               </button>
             ) : (
-              <button className="bg-[#ccb864] text-sm w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3">
+              <button
+                onClick={() => handleAddToCartProduct(product?.id)}
+                className="bg-[#ccb864] text-sm w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
+              >
                 {" "}
                 কার্টে রাখুন <FaShoppingCart />
               </button>

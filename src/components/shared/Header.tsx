@@ -10,10 +10,13 @@ import ReusableDrawer from "../ui/ReusableDrawer";
 import Cart from "../CardComponents/Cart";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
+import { RootState } from "@/redux/store";
 
 type SearchProps = GetProps<typeof Input.Search>;
 
 const Header = () => {
+  const items = useAppSelector((state: RootState) => state.carts.items);
   const [visible, setVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const router = useRouter();
@@ -45,9 +48,11 @@ const Header = () => {
           enterButton
         />
         <div className="flex justify-center items-center gap-6">
-          <MdCall size={25} color="#00276C" />
-          <p className="text-[#00276C] text-lg font-medium">01615597820</p>
-          <div className="relative">
+          <MdCall className=" hidden md:block" size={25} color="#00276C" />
+          <p className="text-[#00276C] text-lg font-medium hidden md:block">
+            01615597820
+          </p>
+          <div className="relative md:mr-0 mr-4">
             <Button
               className="bg-primaryColor text-white font-semibold border-none 
                 absolute -right-[12px] -top-3 hover:bg-primaryColor
@@ -55,7 +60,7 @@ const Header = () => {
               shape="circle"
               size="small"
             >
-              0
+              {items?.length || 0}
             </Button>
             <FaBagShopping
               size={25}

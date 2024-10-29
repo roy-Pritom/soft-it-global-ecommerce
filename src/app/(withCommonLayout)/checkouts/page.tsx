@@ -4,13 +4,16 @@
 
 import { Button, Checkbox, Select, Tooltip } from "antd";
 import Image from "next/image";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-import { useGetAllProductQuery } from "@/redux/api/product/productApi";
+import { useGetCartFilteringQuery } from "@/redux/api/product/productApi";
 import { useEffect, useMemo, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { GiCrossMark } from "react-icons/gi";
+import { useCreateOrderMutation } from "@/redux/api/OrderApi/orderApi";
+import { toast } from "sonner";
+import { clearCart, removeFromCart } from "@/redux/Slice/cartSlice";
 
 interface ProductData {
   categoryId: string;
@@ -37,7 +40,7 @@ interface Photo {
 
 type FormData = {
   name: string;
-  contact: string;
+  contact: number;
   address: string;
   deliveryCharge: string;
 };
@@ -49,7 +52,9 @@ const CheckOutPage = () => {
     [key: string]: string[];
   }>({});
 
-  const { data, isLoading } = useGetAllProductQuery({});
+  const [createOrder, { isLoading: creating }] = useCreateOrderMutation();
+  const dispatch = useAppDispatch();
+  const { data, isLoading } = useGetCartFilteringQuery({});
   if (isLoading) {
     <h1>Loading...</h1>;
   }
@@ -60,13 +65,14 @@ const CheckOutPage = () => {
     formState: { errors },
     watch,
     setValue,
+    reset,
   } = useForm<FormData>({
     defaultValues: {
       deliveryCharge: "60",
     },
   });
 
-  const productData: ProductData[] = data?.data?.data || [];
+  const productData: ProductData[] = data?.data || [];
   const productIdsInCart = items.map((item) => item.productId);
   const cartsData = productData.filter((product: any) =>
     productIdsInCart.includes(product.id)
@@ -83,7 +89,7 @@ const CheckOutPage = () => {
 
   useEffect(() => {
     const initialSizes: { [key: string]: string[] } = {};
-    data?.data?.data?.forEach((product: ProductData) => {
+    data?.data?.forEach((product: ProductData) => {
       initialSizes[product.id] = [product.size[0]];
     });
     setSelectedSizes(initialSizes);
@@ -107,10 +113,11 @@ const CheckOutPage = () => {
   const totalPrice = subtotal + deliveryCharge;
 
   const onSubmit = async (data: any) => {
+    const toastId = toast.loading("Creating...");
     const orderUserData = {
       deliveryCharge: deliveryCharge,
       name: data.name,
-      contact: data.contact,
+      contact: String(data.contact),
       address: data.address,
       totalPrice: totalPrice,
     };
@@ -123,7 +130,18 @@ const CheckOutPage = () => {
       ...orderUserData,
       productOrderData,
     };
-    console.log("productOrderData", confirmOrderData);
+    try {
+      const res = await createOrder(confirmOrderData);
+      if (res?.data?.statusCode === 201) {
+        toast.success(res?.data?.message, { id: toastId, duration: 1000 });
+        dispatch(clearCart());
+        reset();
+      } else {
+        toast.error(res?.data?.message, { id: toastId, duration: 1000 });
+      }
+    } catch (err: any) {
+      console.log(err?.message);
+    }
   };
 
   return (
@@ -150,13 +168,21 @@ const CheckOutPage = () => {
         <div>
           <label className="block font-medium mb-1">আপনার মোবাইল নাম্বার</label>
           <input
-            type="text"
+            type="number"
             placeholder="আপনার মোবাইল নাম্বার লিখুন"
-            {...register("contact", { required: true })}
+            {...register("contact", {
+              required: true,
+              pattern: {
+                value: /^\d{11}$/, // Regular expression to match exactly 11 digits
+                message: "Contact number must be 11 digits",
+              },
+            })}
             className="w-full p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
           {errors.contact && (
-            <span className="text-red-500">This field is required</span>
+            <span className="text-red-500">
+              {errors.contact.message || "This field is required"}
+            </span>
           )}
         </div>
 
@@ -188,8 +214,9 @@ const CheckOutPage = () => {
         </div>
 
         <button
+          disabled={creating}
           type="submit"
-          className="w-full bg-yellow-500 hover:bg-yellow-600 text-white p-3 rounded-md font-semibold mt-4"
+          className="w-full bg-[#ccb864] text-white p-3 rounded-md font-semibold mt-4"
         >
           অর্ডার কনফার্ম করুন
         </button>
@@ -260,6 +287,7 @@ const CheckOutPage = () => {
                     <h1>Tk- {item.price * (quantities[item.id] || 1)}</h1>
                     <Tooltip title="Delete">
                       <Button
+                        onClick={() => dispatch(removeFromCart(item?.id))}
                         size="small"
                         icon={<GiCrossMark size={15} />}
                         danger

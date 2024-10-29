@@ -32,7 +32,7 @@ const items: TabsProps["items"] = [
 
 const FeatureProduct = () => {
   return (
-    <div>
+    <div className=" w-full mx-auto md:px-0 px-8">
       <Tabs
         defaultActiveKey="1"
         items={items}

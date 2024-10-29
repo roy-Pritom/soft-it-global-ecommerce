@@ -48,14 +48,16 @@ const TShirt = () => {
         <p className="text-2xl sm:text-3xl md:text-3xl uppercase font-bold primaryColor">
           Man Fashion
         </p>
-        <Button
-          size="large"
-          className="font-semibold uppercase bg-[#ccb864] text-white hover:bg-[#ccb864] hover:text-white"
-          shape="round"
-          icon={<BsEye />}
-        >
-          See All
-        </Button>
+        <Link href="/product?manFashion">
+          <Button
+            size="large"
+            className="font-semibold uppercase bg-[#ccb864] text-white hover:bg-[#ccb864] hover:text-white"
+            shape="round"
+            icon={<BsEye />}
+          >
+            See All
+          </Button>
+        </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
         {manFashionData?.slice(0, 10).map((item: any) => (

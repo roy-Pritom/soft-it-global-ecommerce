@@ -54,7 +54,7 @@ const NavMenu = () => {
   );
 
   return (
-    <div>
+    <div className="">
       <Dropdown
         className="py-[13.7px] shadow-sm border-none"
         overlay={menu}
@@ -66,7 +66,7 @@ const NavMenu = () => {
         <div className="bg-[#ccb864] flex justify-between px-4 items-center cursor-pointer">
           <div className="flex items-center gap-3">
             <FaBars className="text-white" />
-            <p className="text-white font-semibold text-base">
+            <p className="text-white font-semibold text-base hidden md:block">
               BROWSE CATEGORIES
             </p>
           </div>

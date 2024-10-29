@@ -56,6 +56,21 @@ export const productApi = baseApi.injectEndpoints({
       }),
       providesTags: [TagTypes.product],
     }),
+    getCartFiltering: builder.query({
+      query: () => ({
+        url: "/product/cartFiltering",
+        method: "GET",
+      }),
+      providesTags: [TagTypes.product],
+    }),
+
+    getQueryByProduct: builder.query({
+      query: (arg: string) => ({
+        url: `/product/${arg}`,
+        method: "GET",
+      }),
+      providesTags: [TagTypes.product],
+    }),
   }),
 });
 
@@ -66,4 +81,6 @@ export const {
   useGetTopProductQuery,
   useGetDiscountProductQuery,
   useGetManFashionQuery,
+  useGetQueryByProductQuery,
+  useGetCartFilteringQuery,
 } = productApi;

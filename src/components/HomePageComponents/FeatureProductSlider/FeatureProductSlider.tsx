@@ -17,7 +17,7 @@ const FeatureProductSlider = () => {
 
   const bannerData = data?.data?.data || [];
   return (
-    <>
+    <div className=" md:px-0 px-8">
       <Swiper
         direction={"vertical"}
         slidesPerView={1}
@@ -44,18 +44,8 @@ const FeatureProductSlider = () => {
             />
           </SwiperSlide>
         ))}
-
-        {/* <SwiperSlide className={styles.swiperSlide}>
-          <Image
-            width={445}
-            height={445}
-            className="h-[445px] w-full"
-            src="/banner1.webp"
-            alt=""
-          />
-        </SwiperSlide> */}
       </Swiper>
-    </>
+    </div>
   );
 };
 

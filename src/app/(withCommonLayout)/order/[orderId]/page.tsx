@@ -11,15 +11,28 @@ import { useGetSingleProductQuery } from "@/redux/api/product/productApi";
 import { useGetAllProductByCategoryQuery } from "@/redux/api/category/categoryApi";
 import { Checkbox } from "antd";
 import OrderProductSlider from "../orderComponents/OrderProductSlider";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/Slice/cartSlice";
+import { toast } from "sonner";
 
 const OrderPage = ({ params }: { params: { orderId: string } }) => {
   const { orderId } = params;
   const { data } = useGetSingleProductQuery(orderId);
+  const dispatch = useAppDispatch();
   const product = data?.data;
   const { data: allProductData } = useGetAllProductByCategoryQuery(
     product?.categoryId
   );
-  console.log("All product", allProductData);
+
+  const handleAddToCartProduct = (id: string) => {
+    dispatch(addToCart(id));
+    toast.success("Added Successfully !");
+  };
+  const handleAddToOrderProduct = (id: string) => {
+    dispatch(addToCart(id));
+    toast.success("Added Successfully !");
+  };
+
   return (
     <div className="container mx-auto py-20">
       <div className="flex gap-12 ">
@@ -46,11 +59,17 @@ const OrderPage = ({ params }: { params: { orderId: string } }) => {
           </div>
 
           <div className="flex flex-col gap-3 w-full mt-6 space-y-2 ">
-            <button className="bg-[#ccb864] text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2">
+            <button
+              onClick={() => handleAddToOrderProduct(product?.id)}
+              className="bg-[#ccb864] text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2"
+            >
               <CgShoppingCart size={25} />
               অর্ডার করুন
             </button>
-            <button className="bg-[#ccb864] text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2">
+            <button
+              onClick={() => handleAddToCartProduct(product?.id)}
+              className="bg-[#ccb864] text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2"
+            >
               <MdAddShoppingCart size={25} />
               কার্টে রাখুন
             </button>
