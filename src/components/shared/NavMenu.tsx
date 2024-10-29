@@ -12,22 +12,29 @@ const NavMenu = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const pathname = usePathname();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data, isLoading } = useGetAllCategoryQuery({});
+  // Fetching categories
+  const { data } = useGetAllCategoryQuery({});
   const categoryData = data?.data?.data || [];
+
   useEffect(() => {
-    if (pathname === "/") {
-      setDropdownVisible(true);
+    const isLargeScreen = window.innerWidth >= 768; // Medium screen and up
+    if (pathname === "/" && isLargeScreen) {
+      setDropdownVisible(true); // Keep dropdown open on homepage for large screens
     } else {
-      setDropdownVisible(false);
+      setDropdownVisible(false); // Close dropdown on other pages or small screens
     }
   }, [pathname]);
 
   const handleVisibleChange = (visible: boolean) => {
-    if (pathname !== "/") {
-      setDropdownVisible(visible);
+    const isLargeScreen = window.innerWidth >= 768;
+    // On homepage and large screens, dropdown should stay open
+    if (pathname === "/" && isLargeScreen) {
+      setDropdownVisible(true);
+    } else {
+      setDropdownVisible(visible); // Regular dropdown behavior
     }
   };
+
   const menuItems = categoryData?.map((category: any) => ({
     key: category?.id,
     label: category?.name,
@@ -54,14 +61,21 @@ const NavMenu = () => {
   );
 
   return (
-    <div className="">
+    <div
+      onMouseEnter={() => setDropdownVisible(true)} // Show dropdown on hover
+      onMouseLeave={() => {
+        if (pathname !== "/" || window.innerWidth < 768) {
+          setDropdownVisible(false); // Hide dropdown only if not on homepage or small screen
+        }
+      }}
+    >
       <Dropdown
         className="py-[13.7px] shadow-sm border-none"
         overlay={menu}
-        trigger={["hover"]}
+        trigger={[]}
         placement="bottom"
         visible={dropdownVisible}
-        onVisibleChange={handleVisibleChange}
+        onVisibleChange={handleVisibleChange} // Handle click to toggle visibility
       >
         <div className="bg-[#ccb864] flex justify-between px-4 items-center cursor-pointer">
           <div className="flex items-center gap-3">

@@ -15,14 +15,14 @@ const BannerSlider = () => {
   const bannerData = data?.data?.data || [];
 
   return (
-    <div className="px-2 pt-2">
+    <div className="md:px-2 px-0 pt-2">
       <Carousel autoplay>
         {bannerData.map((data: any) => (
           <div key={data.id}>
             <Image
               width={445}
               height={445}
-              className="h-[445px] w-full"
+              className="md:h-[445px] h-[240px] w-full"
               src={data.img || "/banner.jpg"}
               alt={`Banner ${data.id}`}
             />

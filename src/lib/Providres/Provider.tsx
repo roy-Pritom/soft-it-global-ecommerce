@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "@/redux/store";
 import { useEffect, useState } from "react";
+import { Spin } from "antd";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -11,12 +12,23 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   if (!isMounted) {
-    return <div className=" text-center pt-3">Loading...</div>;
+    return (
+      <div className=" text-center pt-3">
+        <Spin fullscreen />
+      </div>
+    );
   }
 
   return (
     <Provider store={store}>
-      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+      <PersistGate
+        loading={
+          <div>
+            <Spin size="large" fullscreen />
+          </div>
+        }
+        persistor={persistor}
+      >
         {children}
       </PersistGate>
     </Provider>
