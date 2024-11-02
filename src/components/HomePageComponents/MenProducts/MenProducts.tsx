@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";

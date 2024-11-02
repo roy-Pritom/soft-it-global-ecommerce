@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Card, Typography, Button } from "antd";
 import { Fade, Zoom } from "react-awesome-reveal";
