@@ -78,14 +78,14 @@ const ProductPage = () => {
                   {item.name}
                 </p>
                 <p className="my-3">Tk- {item.price}</p>
-                <button className="w-full flex justify-center items-center gap-3 bg-[#ccb864] text-white text-xs py-2 px-4 font-semibold">
+                <button className="w-full flex justify-center items-center gap-3 bg-primaryColor text-white text-xs py-2 px-4 font-semibold">
                   অর্ডার করুন <FaShoppingCart size={16} />
                 </button>
               </Link>
             </div>
             <div
               onClick={() => handleAddToCartProduct(item.id)}
-              className="absolute top-2 right-2 bg-[#ccb864] text-white p-2 rounded-full cursor-pointer shadow-lg"
+              className="absolute top-2 right-2 bg-primaryColor text-white p-2 rounded-full cursor-pointer shadow-lg"
             >
               <FaShoppingCart className="text-sm" />
             </div>

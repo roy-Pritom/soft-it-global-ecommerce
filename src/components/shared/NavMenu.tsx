@@ -13,7 +13,7 @@ const NavMenu = () => {
   const pathname = usePathname();
 
   // Fetching categories
-  const { data } = useGetAllCategoryQuery({});
+  const { data,isLoading } = useGetAllCategoryQuery({});
   const categoryData = data?.data?.data || [];
 
   useEffect(() => {
@@ -34,6 +34,24 @@ const NavMenu = () => {
       setDropdownVisible(visible); // Regular dropdown behavior
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="bg-gray-300 animate-pulse h-[445px] w-full rounded-md px-2 pt-2 md:block hidden">
+        <div className="flex items-center gap-3 ml-1 pt-2">
+        <p className="bg-gray-400 animate-pulse h-8 w-10  rounded-md"></p>
+        <p className="bg-gray-400 animate-pulse h-8 w-32  rounded-md"></p>
+
+        </div>
+        <p className="bg-gray-400 animate-pulse h-8 w-32  rounded-md mt-6 ml-1"></p>
+        <p className="bg-gray-400 animate-pulse h-8 w-32  rounded-md mt-6 ml-1"></p>
+        <p className="bg-gray-400 animate-pulse h-8 w-32  rounded-md mt-6 ml-1"></p>
+        <p className="bg-gray-400 animate-pulse h-8 w-32  rounded-md mt-6 ml-1"></p>
+        <p className="bg-gray-400 animate-pulse h-8 w-32  rounded-md mt-6 ml-1"></p>
+    
+      </div>
+    );
+  }
 
   const menuItems = categoryData?.map((category: any) => ({
     key: category?.id,
@@ -77,10 +95,10 @@ const NavMenu = () => {
         visible={dropdownVisible}
         onVisibleChange={handleVisibleChange} // Handle click to toggle visibility
       >
-        <div className="bg-[#ccb864] flex justify-between px-4 items-center cursor-pointer">
+        <div className="bg-primaryColor flex justify-between px-4 items-center cursor-pointer">
           <div className="flex items-center gap-3">
             <FaBars className="text-white" />
-            <p className="text-white font-semibold text-base hidden md:block">
+            <p className="text-white font-semibold lg:text-base md:text-sm hidden md:block">
               BROWSE CATEGORIES
             </p>
           </div>

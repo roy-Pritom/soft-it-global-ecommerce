@@ -38,7 +38,7 @@ const ViewProductInformation = ({ productData }: { productData: any }) => {
           <p className="text-lg">Quantity:</p>
           <div className="flex items-center font-bold gap-4">
             <button
-              className="bg-[#ccb864] h-8 w-8 rounded-full flex justify-center items-center"
+              className="bg-primaryColor h-8 w-8 rounded-full flex justify-center items-center"
               onClick={() =>
                 setQuantity((prevQuantity) =>
                   prevQuantity > 1 ? prevQuantity - 1 : 1
@@ -49,7 +49,7 @@ const ViewProductInformation = ({ productData }: { productData: any }) => {
             </button>
             {quantity}
             <button
-              className="bg-[#ccb864] h-8 w-8 rounded-full flex justify-center items-center"
+              className="bg-primaryColor h-8 w-8 rounded-full flex justify-center items-center"
               onClick={() => setQuantity((prevQuantity) => prevQuantity + 1)}
             >
               <FaPlus size={16} className="text-white font-bold" />
@@ -75,19 +75,19 @@ const ViewProductInformation = ({ productData }: { productData: any }) => {
       <div className=" space-y-3 pt-6">
         <button
           onClick={() => handleAddToCartProduct(productData?.id)}
-          className="bg-[#ccb864]  w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
+          className="bg-primaryColor  w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
         >
           {" "}
           অর্ডার করুন <FaShoppingCart />
         </button>
         <button
           onClick={() => handleOrderToCartProduct(productData?.id)}
-          className="bg-[#ccb864] w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
+          className="bg-primaryColor w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
         >
           {" "}
           কার্টে রাখুন <FaShoppingCart />
         </button>
-        <button className="bg-[#ccb864] w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3">
+        <button className="bg-primaryColor w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3">
           {" "}
           0847674374 <FaPhone />
         </button>

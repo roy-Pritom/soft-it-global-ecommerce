@@ -33,13 +33,13 @@ const Header = () => {
     setVisible(false);
   };
   return (
-    <div className=" py-3 bg-gray-100">
-      <div className="flex justify-between items-center container mx-auto">
+    <div className=" py-3 bg-black border- border-red-400 h-[120px] ">
+      <div className="flex justify-between items-center container mx-auto -mt-5">
         <Link href="/">
-          <Image src="/Logo/manio-logo.png" width={80} height={80} alt="logo" />
+          <Image src="/Logo/manio-logo.png" width={150} height={50}  className="" alt="logo" />
         </Link>
         <Search
-          className=" w-1/2 border border-gray-100 text-slate-600 rounded-md custom-search"
+          className=" w-1/2  text-slate-600 rounded-md custom-search"
           size="large"
           placeholder="Search"
           onSearch={onSearch}
@@ -48,9 +48,9 @@ const Header = () => {
           enterButton
         />
         <div className="flex justify-center items-center gap-6">
-          <MdCall className=" hidden md:block" size={25} color="#00276C" />
-          <p className="text-[#00276C] text-lg font-medium hidden md:block">
-            01615597820
+          <MdCall className=" hidden md:block" size={25} color="white" />
+          <p className="text-white text-lg font-medium hidden md:block">
+            +880 1711979475
           </p>
           <div className="relative md:mr-0 mr-4">
             <Button
@@ -64,7 +64,7 @@ const Header = () => {
             </Button>
             <FaBagShopping
               size={25}
-              color="#00276C"
+              color="white"
               className="cursor-pointer"
               onClick={showDrawer}
             />

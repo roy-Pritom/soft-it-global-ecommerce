@@ -68,7 +68,7 @@ const ProductShowContainer = () => {
                   </div>
                 </div>
               </div>
-              <button className="sm:w-fit w-full px-3.5 py-2 bg-[#ccb864] hover:bg-[#ccb864] transition-all duration-700 ease-in-out rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] justify-center items-center flex">
+              <button className="sm:w-fit w-full px-3.5 py-2 bg-primaryColor hover:bg-primaryColor transition-all duration-700 ease-in-out rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] justify-center items-center flex">
                 <span className="px-1.5 text-white text-sm font-medium leading-6">
                   আরও পড়ুন
                 </span>

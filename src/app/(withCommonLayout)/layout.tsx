@@ -1,3 +1,4 @@
+"use client"
 import CheckOutBox from "@/components/shared/CheckOutBox";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
@@ -15,10 +16,10 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         <div className="col-span-3">
           <div className="border-y flex items-center gap-4 pl-4 py-4">
             <Link href="/">
-              <p className="text-base font-bold primaryColor">HOME</p>
+              <p className="text-base font-bold text-primaryColor">HOME</p>
             </Link>
             <Link href="/shop">
-              <p className="text-base font-bold primaryColor">SHOP</p>
+              <p className="text-base font-bold text-primaryColor">SHOP</p>
             </Link>
           </div>
           {/* <BannerSlider /> */}
@@ -26,7 +27,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       </div>
       {children}
       <Footer />
-      <div className="fixed right-4 top-1/2">
+      <div className="fixed right-0 top-1/2 z-50">
         <Link href="/checkouts">
           <CheckOutBox />
         </Link>

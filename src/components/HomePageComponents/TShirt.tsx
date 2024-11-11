@@ -45,13 +45,13 @@ const TShirt = () => {
   return (
     <div className="md:my-20 my-10 md:px-0 px-8">
       <div className="bg-gray-100 p-10 rounded-md mb-14 flex justify-between">
-        <p className="text-2xl sm:text-3xl md:text-3xl uppercase font-bold primaryColor">
+        <p className="text-2xl sm:text-3xl md:text-3xl uppercase font-bold text-primaryColor">
           Man Fashion
         </p>
         <Link href="/product?manFashion">
           <Button
             size="large"
-            className="font-semibold uppercase bg-[#ccb864] text-white hover:bg-[#ccb864] hover:text-white"
+            className="font-semibold uppercase bg-primaryColor text-white hover:bg-primaryColor hover:text-white"
             shape="round"
             icon={<BsEye />}
           >
@@ -78,14 +78,14 @@ const TShirt = () => {
                   {item.name}
                 </p>
                 <p className="my-3">Tk- {item.price}</p>
-                <button className="w-full flex justify-center items-center gap-3 bg-[#ccb864] text-white text-xs py-2 px-4 font-semibold">
+                <button className="w-full flex justify-center items-center gap-3 bg-primaryColor text-white text-xs py-2 px-4 font-semibold">
                   অর্ডার করুন <FaShoppingCart size={16} />
                 </button>
               </Link>
             </div>
             <div
               onClick={() => handleAddToCartProduct(item.id)}
-              className="absolute top-2 right-2 bg-[#ccb864] text-white p-2 rounded-full cursor-pointer shadow-lg"
+              className="absolute top-2 right-2 bg-primaryColor text-white p-2 rounded-full cursor-pointer shadow-lg"
             >
               <FaShoppingCart className="text-sm" />
             </div>

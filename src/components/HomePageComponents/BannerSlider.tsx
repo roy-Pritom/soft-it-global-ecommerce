@@ -8,7 +8,7 @@ const BannerSlider = () => {
   const { data, isLoading } = useGetAllBannerQuery({});
   if (isLoading) {
     return (
-      <div className="bg-gray-300 animate-pulse h-[445px] w-full rounded-md px-2 pt-2"></div>
+      <div className="bg-gray-300 animate-pulse h-[390px] lg:w-[902px] md:w-[450px] w-full rounded-md md:px-2 md:pt-2 md:absolute md:top-40 md:ml-2 m-0 p-0"></div>
     );
   }
 

@@ -216,7 +216,7 @@ const CheckOutPage = () => {
         <button
           disabled={creating}
           type="submit"
-          className="w-full bg-[#ccb864] text-white p-3 rounded-md font-semibold mt-4"
+          className="w-full bg-primaryColor text-white p-3 rounded-md font-semibold mt-4"
         >
           অর্ডার কনফার্ম করুন
         </button>
@@ -252,14 +252,14 @@ const CheckOutPage = () => {
                   <div className=" space-y-2">
                     <div className="flex items-center font-bold gap-4">
                       <button
-                        className="bg-[#ccb864] h-6 w-6 rounded-full flex justify-center items-center"
+                        className="bg-primaryColor h-6 w-6 rounded-full flex justify-center items-center"
                         onClick={() => handleQuantityChange(item?.id, false)}
                       >
                         <FaMinus size={16} className="text-white font-bold" />
                       </button>
                       {quantities[item?.id] || 1}
                       <button
-                        className="bg-[#ccb864] h-6 w-6 rounded-full flex justify-center items-center"
+                        className="bg-primaryColor h-6 w-6 rounded-full flex justify-center items-center"
                         onClick={() => handleQuantityChange(item?.id, true)}
                       >
                         <FaPlus size={16} className="text-white font-bold" />

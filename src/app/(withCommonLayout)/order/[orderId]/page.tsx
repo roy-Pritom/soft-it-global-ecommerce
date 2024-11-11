@@ -61,14 +61,14 @@ const OrderPage = ({ params }: { params: { orderId: string } }) => {
           <div className="flex flex-col gap-3 w-full mt-6 space-y-2 ">
             <button
               onClick={() => handleAddToOrderProduct(product?.id)}
-              className="bg-[#ccb864] text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2"
+              className="bg-primaryColor text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2"
             >
               <CgShoppingCart size={25} />
               অর্ডার করুন
             </button>
             <button
               onClick={() => handleAddToCartProduct(product?.id)}
-              className="bg-[#ccb864] text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2"
+              className="bg-primaryColor text-white flex items-center justify-center gap-2 text-base font-bold w-full py-2"
             >
               <MdAddShoppingCart size={25} />
               কার্টে রাখুন

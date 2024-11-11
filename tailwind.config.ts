@@ -11,14 +11,15 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primaryColor: "#FFCA2C",
+        primaryColor: "#808000",
       },
       container: {
         screens: {
-          sm: "600px",
-          md: "1024px",
-          lg: "1250px"
-         
+          sm: "640px",    // Small devices (mobile)
+          md: "768px",    // Medium devices (tablet)
+          lg: "1380px",   // Large devices (laptop)
+           // Extra large devices (desktop)
+
         },
       },
     },

@@ -56,7 +56,7 @@ const ReusableDrawer: React.FC<ReusableDrawerProps> = ({
         <div className="w-1/2">
           <button
             onClick={handleCheckoutClick}
-            className="bg-[#ccb864] w-full text-white flex items-center justify-center gap-2 py-2 px-4"
+            className="bg-primaryColor w-full text-white flex items-center justify-center gap-2 py-2 px-4"
             style={{
               flex: 2,
               marginRight: "4px",

@@ -37,7 +37,7 @@ const PolicyCard = () => {
 
   return (
     <div className="w-full container mx-auto md:px-0 px-8 py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 bg-gray-100 py-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 bg-gray-100 py-2">
         {features.map((feature) => (
           <motion.div
             key={feature.id}
@@ -53,7 +53,7 @@ const PolicyCard = () => {
                 alt={feature.title}
                 width={100}
                 height={100}
-                className="w-full"
+                className="w-full text-primaryColor"
               />
             </motion.div>
             <h3 className="text-lg font-semibold mb-2 text-center">

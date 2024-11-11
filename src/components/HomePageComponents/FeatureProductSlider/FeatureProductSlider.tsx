@@ -37,8 +37,8 @@ const FeatureProductSlider = () => {
           <SwiperSlide className={styles.swiperSlide} key={data.id}>
             <Image
               width={445}
-              height={445}
-              className="h-[445px] w-full"
+              height={450}
+              className=" w-full"
               src={data?.img}
               alt=""
             />

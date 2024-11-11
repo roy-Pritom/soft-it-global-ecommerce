@@ -2,7 +2,7 @@ import FeatureProduct from "@/components/HomePageComponents/FeatureProduct";
 import FeatureProductSlider from "@/components/HomePageComponents/FeatureProductSlider/FeatureProductSlider";
 import Hero from "@/components/HomePageComponents/Hero";
 // import MenProducts from "@/components/HomePageComponents/MenProducts/MenProducts";
-import ProductShowContainer from "@/components/HomePageComponents/ProductShowContainer";
+// import ProductShowContainer from "@/components/HomePageComponents/ProductShowContainer";
 import PopularCategory from "@/components/HomePageComponents/ProductsTabs/PopularCategory/PopularCategory";
 import Saree from "@/components/HomePageComponents/Saree";
 import TShirt from "@/components/HomePageComponents/TShirt";
@@ -19,7 +19,7 @@ export default function Home() {
       <TShirt />
       <WomenFashion />
       <Saree />
-      <ProductShowContainer />
+      {/* <ProductShowContainer /> */}
       <PolicyCard />
     </div>
   );

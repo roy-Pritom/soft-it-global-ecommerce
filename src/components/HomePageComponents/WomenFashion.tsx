@@ -50,7 +50,7 @@ const WomenFashion = () => {
         <Link href="/product?womanFashion">
           <Button
             size="large"
-            className="font-semibold uppercase bg-[#CCB864] text-white"
+            className="font-semibold uppercase bg-primaryColor text-white"
             shape="round"
             icon={<BsEye />}
           >
@@ -78,7 +78,7 @@ const WomenFashion = () => {
                       e.preventDefault();
                       handleAddToCart(item.id);
                     }}
-                    className="w-6 h-6 rounded-full absolute top-0 right-0 -mt-2 -mr-2 bg-[#ccb864] text-white flex items-center justify-center cursor-pointer"
+                    className="w-6 h-6 rounded-full absolute top-0 right-0 -mt-2 -mr-2 bg-primaryColor text-white flex items-center justify-center cursor-pointer"
                   >
                     <FaShoppingCart className="text-sm" />
                   </div>
@@ -88,7 +88,7 @@ const WomenFashion = () => {
                 </p>
                 <p className="my-3">Tk- {item.price}</p>
                 <div className="w-full pb-4">
-                  <button className="w-full flex justify-center items-center gap-3 bg-[#ccb864] text-white text-xs py-2 px-4 font-semibold">
+                  <button className="w-full flex justify-center items-center gap-3 bg-primaryColor text-white text-xs py-2 px-4 font-semibold">
                     অর্ডার করুন <FaShoppingCart size={16} />
                   </button>
                 </div>

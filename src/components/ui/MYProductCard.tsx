@@ -55,7 +55,7 @@ const MYProductCard = ({ product }: { product: any }) => {
             </button>
             <button
               onClick={showModal2}
-              className=" text-xs w-full bg-[#ccb864] text-white font-semibold px-4 py-2 shadow-sm rounded-sm"
+              className=" text-xs w-full bg-primaryColor text-white font-semibold px-4 py-2 shadow-sm rounded-sm"
             >
               অর্ডার করুন
             </button>

@@ -1,5 +1,5 @@
 "use client";
-import { Layout, Row, Col, Typography, Space } from "antd";
+import React from "react";
 import {
   FacebookOutlined,
   InstagramOutlined,
@@ -9,111 +9,131 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const { Footer: AntFooter } = Layout;
-const { Text } = Typography;
-
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
+const Footer: React.FC = () => {
   return (
-    <AntFooter
-      className="pt-8"
-      style={{ backgroundColor: "#001529", color: "#fff" }}
-    >
-      <div className="container mx-auto">
-        <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3">
-          <div>
+    <footer className="relative bg-black text-white py-6 bg-[url('https://cdn.bitcommerz.com/manfare-bd/media/1710417875567-manfare_bd-id-13.jpeg')] bg-cover bg-center ">
+      {/* Overlay for black shadow effect */}
+      <div className="absolute inset-0 bg-black opacity-70"></div>
+
+      {/* Main content with overlay effect */}
+      <div className="relative container mx-auto grid grid-cols-1 md:grid-cols-3 gap-0 px-20">
+        {/* Logo and Contact */}
+        <div className="space-y-1">
+          <div className="flex items-center space-x-2">
             <Image
-              src={"/Logo/manio-logo.png"}
-              alt=""
+              src="/Logo/manio-logo-2.png"
+              alt="Manfare Logo"
               width={100}
-              height={100}
+              height={10}
+              className=""
+        
             />
           </div>
-          <div className=" w-full flex justify-center items-center">
-            <div>
-              <Space size="large" className=" text-sm pb-4">
-                <Link href={"/shop"}>Shopping</Link>
-                <Link href={"/shop"}>MAN</Link>
-                <Link href={"/shop"}>Woman</Link>
-                <Link href={"/shop"}>Product</Link>
-              </Space>
-              <Space size="large">
-                <Image src="/nagad.svg" alt="Nagad" width={50} height={30} />
-                <Image src="/bkash.svg" alt="bKash" width={50} height={30} />
-                <Image src="/upay.svg" alt="Visa" width={50} height={30} />
-                <Image src="/visaCard.svg" alt="Visa" width={50} height={30} />
-              </Space>
-            </div>
-          </div>
-          <div className="w-full flex justify-end items-center">
-            <div>
-              <h1 className=" text-center text-base pb-4">Following Manio</h1>
-              <Space className=" space-x-2">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FacebookOutlined
-                    style={{ fontSize: "24px", color: "#fff" }}
-                  />
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <InstagramOutlined
-                    style={{ fontSize: "24px", color: "#fff" }}
-                  />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <TwitterOutlined
-                    style={{ fontSize: "24px", color: "#fff" }}
-                  />
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <LinkedinOutlined
-                    style={{ fontSize: "24px", color: "#fff" }}
-                  />
-                </a>
-              </Space>
-            </div>
+          <p className="text-gray-400">be exclusive . be you</p>
+          <p className="text-lg font-semibold text-primaryColor">
+            +880 1711979475
+          </p>
+          <p className="text-lg font-semibold text-primaryColor">
+            +880 1711359277
+          </p>
+          <p className="text-gray-400">Worktime: SAT - FRI, 10AM - 10PM</p>
+          <div className="flex space-x-3 text-gray-400">
+            <a href="#" className="hover:text-white">
+              <FacebookOutlined className="text-xl" />
+            </a>
+            <a href="#" className="hover:text-white">
+              <InstagramOutlined className="text-xl" />
+            </a>
+            <a href="#" className="hover:text-white">
+              <TwitterOutlined className="text-xl" />
+            </a>
+            <a href="#" className="hover:text-white">
+              <LinkedinOutlined className="text-xl" />
+            </a>
           </div>
         </div>
-        <Row justify="center" style={{ marginTop: 40 }}>
-          <Col>
-            <Text style={{ color: "#d9d9d9" }}>
-              © {currentYear} MANIO. All Rights Reserved.
-            </Text>
-          </Col>
-          <Col>
-            <h1 className=" hidden md:block px-12"> | </h1>
-          </Col>
-          <Col>
-            <Text className="text-sm uppercase text-gray-200">
-              Developed By -{" "}
-              <a
-                className="text-[#009975] hover:text-[#007a5e] underline"
-                href="https://www.wevloper.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                WEVLOPER
+
+        {/* Information Links */}
+        <div className="space-y-4">
+          <h3 className="font-semibold text-lg">INFORMATION</h3>
+          <ul className="space-y-2 text-gray-400">
+            <li>
+              <a href="#" className="hover:text-white">
+                About
               </a>
-            </Text>
-          </Col>
-        </Row>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white">
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white">
+                Shipping Information
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white">
+                Return & Exchange Policy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white">
+                Contact Us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white">
+                FAQs
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Contact Info */}
+        <div className="space-y-4">
+          <h3 className="font-semibold text-lg">CONTACT INFO</h3>
+          <p className="text-gray-400">
+          Baridhara, Block-J, Road-2B, Twin Brooks, House-8, Flat-B2, Gulshan, Dhaka 1212.
+          </p>
+          <p className="text-gray-400">manioofficial@gmail.com</p>
+         <div className="flex items-center gap-3">
+          <Image src="/website.png" width={24} height={24} className="w-[24px] h-[24px] text-primaryColor" alt="" />
+         <Link href='https://maniobd.com' className="text-primaryColor font-bold">
+            ManioBd
+          </Link>
+         </div>
+        </div>
+
+        {/* Ad Image */}
+        {/* <div className="flex justify-end">
+          <Image
+            src="https://cdn.bitcommerz.com/manfarebd/media/1716906731281-manfarebd-id-13.jpeg"
+            width={250}
+            height={200}
+            className="rounded-md"
+            alt="Ad"
+          />
+        </div> */}
       </div>
-    </AntFooter>
+
+      {/* Payment Options */}
+      <div className="relative container mx-auto mt-1">
+        <h3 className="text-lg font-semibold text-center mb-4">Pay With</h3>
+        <div className="flex justify-center space-x-4 flex-wrap">
+          <Image src="/visaCard.svg" alt="Visa" width={60} height={60} className="h-10" />
+          <Image src="/nagad.svg" alt="Nagad" width={60} height={60} className="h-10" />
+          <Image src="/upay.svg" alt="Upay" width={60} height={60} className="h-10" />
+          <Image src="/visaCard.svg" alt="Visa" width={60} height={60} className="h-10" />
+          <Image src="/nagad.svg" alt="Nagad" width={60} height={60} className="h-10" />
+          <Image src="/upay.svg" alt="Upay" width={60} height={60} className="h-10" />
+          <Image src="/visaCard.svg" alt="Visa" width={60} height={60} className="h-10" />
+          <Image src="/nagad.svg" alt="Nagad" width={60} height={60} className="h-10" />
+          <Image src="/upay.svg" alt="Upay" width={60} height={60} className="h-10" />
+          {/* Add more payment option logos as needed */}
+        </div>
+      </div>
+    </footer>
   );
 };
 

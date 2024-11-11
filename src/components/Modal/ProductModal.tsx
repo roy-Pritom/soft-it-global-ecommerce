@@ -74,7 +74,7 @@ const ProductModal = ({
               <p className="text-lg">Quantity:</p>
               <div className="flex items-center font-bold gap-4">
                 <button
-                  className="bg-[#ccb864] h-8 w-8 rounded-full flex justify-center items-center"
+                  className="bg-primaryColor h-8 w-8 rounded-full flex justify-center items-center"
                   onClick={() =>
                     setQuantity((prevQuantity) =>
                       prevQuantity > 1 ? prevQuantity - 1 : 1
@@ -85,7 +85,7 @@ const ProductModal = ({
                 </button>
                 {quantity}
                 <button
-                  className="bg-[#ccb864] h-8 w-8 rounded-full flex justify-center items-center"
+                  className="bg-primaryColor h-8 w-8 rounded-full flex justify-center items-center"
                   onClick={() =>
                     setQuantity((prevQuantity) => prevQuantity + 1)
                   }
@@ -101,7 +101,7 @@ const ProductModal = ({
             {isOrder ? (
               <button
                 onClick={() => handleAddToOrderProduct(product?.id)}
-                className="bg-[#ccb864] text-sm  w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
+                className="bg-primaryColor text-sm  w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
               >
                 {" "}
                 অর্ডার করুন <FaShoppingCart />
@@ -109,13 +109,13 @@ const ProductModal = ({
             ) : (
               <button
                 onClick={() => handleAddToCartProduct(product?.id)}
-                className="bg-[#ccb864] text-sm w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
+                className="bg-primaryColor text-sm w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3"
               >
                 {" "}
                 কার্টে রাখুন <FaShoppingCart />
               </button>
             )}
-            <button className="bg-[#ccb864] text-sm w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3">
+            <button className="bg-primaryColor text-sm w-full font-bold text-white py-2 px-4 flex justify-center items-center gap-3">
               {" "}
               0847674374 <FaPhone />
             </button>
