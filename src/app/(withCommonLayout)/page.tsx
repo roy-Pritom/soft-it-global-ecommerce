@@ -10,6 +10,7 @@ import WomenFashion from "@/components/HomePageComponents/WomenFashion";
 import PolicyCard from "@/components/shared/PolicyCard";
 
 export default function Home() {
+  // fdew
   return (
     <div className="container mx-auto ">
       <Hero />
