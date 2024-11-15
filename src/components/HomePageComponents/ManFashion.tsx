@@ -2,20 +2,23 @@
 "use client";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 import { Button } from "antd";
 import { BsEye } from "react-icons/bs";
-import { useGetAllWomanFashionQuery } from "@/redux/api/BannerApi/bannerApi";
+import { useGetManFashionQuery } from "@/redux/api/product/productApi";
 import Link from "next/link";
 import MYProductCardLoading from "./LazyLoadingComponents/MYProductCardLoading";
 import MYProductCard from "../ui/MYProductCard";
 import Slider from "react-slick";
 import { settings } from "@/utils/slideSeetings";
-const WomenFashion = () => {
-  const { data, isLoading } = useGetAllWomanFashionQuery({});
-  const womanData = data?.data || [];
+
+const ManFashion = () => {
+
+  const { data, isLoading } = useGetManFashionQuery({});
+  const manFashionData = data?.data;
   if (isLoading) {
     return (
-      <div className="">
+      <div className="mt-10 w-full">
         <div className="w-full h-40 bg-gray-300 animate-pulse rounded-md flex justify-between items-center px-5">
           <h1 className="bg-gray-400 animate-pulse w-36 h-8 rounded-md"></h1>
           <h1 className="bg-gray-400 animate-pulse w-24 h-10 rounded-md"></h1>
@@ -31,18 +34,21 @@ const WomenFashion = () => {
     );
   }
 
-
+  // const handleAddToCartProduct = (productId: string) => {
+  //   dispatch(addToCart(productId));
+  //   toast.success("Add Successfully");
+  // };
 
   return (
     <div className="md:my-20 my-10 md:px-0 px-8">
-      <div className="bg-gray-200 p-8 rounded-md mb-14 flex justify-between">
-        <p className=" text-xl sm:text-2xl md:text-3xl uppercase font-bold primaryColor">
-          Women Fashion
+      <div className="bg-gray-100 p-10 rounded-md mb-14 flex justify-between">
+        <p className="text-2xl sm:text-3xl md:text-3xl uppercase font-bold text-primaryColor">
+          Man Fashion
         </p>
-        <Link href="/product?womanFashion">
+        <Link href="/product?manFashion">
           <Button
             size="large"
-            className="font-semibold uppercase bg-primaryColor text-white"
+            className="font-semibold uppercase bg-primaryColor text-white hover:bg-primaryColor hover:text-white"
             shape="round"
             icon={<BsEye />}
           >
@@ -51,12 +57,13 @@ const WomenFashion = () => {
         </Link>
       </div>
       <Slider {...settings}>
-        {womanData?.slice(0, 10).map((item: any) => (
-                   <MYProductCard product={item} key={item.id}/>
+        {manFashionData?.slice(0, 10).map((item: any) => (
+   
+          <MYProductCard product={item} key={item.id}/>
         ))}
       </Slider>
     </div>
   );
 };
 
-export default WomenFashion;
+export default ManFashion;

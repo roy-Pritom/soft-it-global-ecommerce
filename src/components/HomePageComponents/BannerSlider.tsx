@@ -1,34 +1,56 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useGetAllBannerQuery } from "@/redux/api/BannerApi/bannerApi";
-import { Carousel } from "antd";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
 
 const BannerSlider = () => {
   const { data, isLoading } = useGetAllBannerQuery({});
+  
   if (isLoading) {
     return (
-      <div className="bg-gray-300 animate-pulse h-[390px] lg:w-[902px] md:w-[450px] w-full rounded-md md:px-2 md:pt-2 md:absolute md:top-40 md:ml-2 m-0 p-0"></div>
+      <div className="bg-gray-300 animate-pulse h-[300px] w-full rounded-md"></div>
     );
   }
 
   const bannerData = data?.data?.data || [];
 
   return (
-    <div className="md:px-2 px-0 pt-2">
-      <Carousel autoplay>
+    <div className="w-full bg-black">
+      <Swiper
+        loop={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true
+        }}
+        modules={[Autoplay, Pagination]}
+        className=" w-full"
+      >
         {bannerData.map((data: any) => (
-          <div key={data.id}>
-            <Image
-              width={445}
-              height={445}
-              className="md:h-[445px] h-[240px] w-full"
-              src={data.img || "/banner.jpg"}
-              alt={`Banner ${data.id}`}
-            />
-          </div>
+          <SwiperSlide key={data?.id} className="!p-0 !m-0 w-full h-[300px]">
+      
+              <Image
+                src={data.img || "/banner.jpg"}
+                alt={`Banner ${data.id}`}
+                width={1920} // Next.js will adjust based on layout and height
+                height={300}
+                className="w-full h-[510px] object-cover !p-0 !m-0"
+                priority
+                unoptimized // Use this if the image URL is external
+              />
+            
+          </SwiperSlide>
         ))}
-      </Carousel>
+      </Swiper>
+
+      {/* Pagination dots */}
+      <div className="swiper-pagination absolute bottom-5 left-1/2 transform -translate-x-1/2"></div>
     </div>
   );
 };

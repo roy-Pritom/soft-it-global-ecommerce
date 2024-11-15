@@ -15,6 +15,7 @@ export const categoryApi = baseApi.injectEndpoints({
     }),
     getAllProductByCategory: builder.query({
       query: (categoryId: string) => {
+        console.log('pana;',categoryId)
         return {
           url: `/product?categoryId=${categoryId}`,
           method: "GET",

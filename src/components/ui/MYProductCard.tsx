@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import React, { useRef, useState } from "react";
-import { Fade } from "react-awesome-reveal";
+// import { Fade } from "react-awesome-reveal";
 import ProductModal from "../Modal/ProductModal";
-
+import { Button, Rate } from "antd";
+import { FaCartShopping } from "react-icons/fa6";
+import Link from "next/link";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 const MYProductCard = ({ product }: { product: any }) => {
@@ -18,60 +20,47 @@ const MYProductCard = ({ product }: { product: any }) => {
     setIsModalVisible(true);
     setIsOrder(false);
   };
-  const showModal2 = (event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setIsModalVisible(true);
-    setIsOrder(true);
-  };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
   return (
-    <div className=" w-full ">
-      <Link href={`/order/${product?.id}`}>
-        <div className="bg-gray-100 md:w-full w-full text-center border border-gray-100 px-2">
-          <Fade>
-            <Image
-              src={product?.photo ? product?.photo[0]?.img : "/img2.jpg"}
-              alt="img1"
-              width={150}
-              height={230}
-              className="mx-auto bg-[#E5E5E5] w-full h-[280px] md:h-[200px]"
-            />
-          </Fade>
-          <p className="text-center text-sm font-medium mt-2">
-            {product?.name}
-          </p>
-          <p className="my-3">{product?.price}tk</p>
-          <div className="flex w-full items-center justify-center pb-4 gap-1">
-            <button
-              className="text-xs w-full  bg-[#00276C] text-white font-semibold px-4 py-2 shadow-sm rounded-sm"
-              onClick={showModal}
-            >
-              কার্টে রাখুন
-            </button>
-            <button
-              onClick={showModal2}
-              className=" text-xs w-full bg-primaryColor text-white font-semibold px-4 py-2 shadow-sm rounded-sm"
-            >
-              অর্ডার করুন
-            </button>
-          </div>
-        </div>
-      </Link>
-
-      {/* Antd Modal */}
-      <ProductModal
+   
+   <div className="w-full">
+ <Link href={`/view/${product.id}`}>
+ <div className="max-w-sm rounded-lg shadow-md overflow-hidden border border-gray-200">
+    <div className="relative w-full h-64">
+      {/* <Fade> */}
+      <Image src={product?.photo[0]?.img} alt='productImg' layout="fill" objectFit="cover" />
+      {/* </Fade> */}
+    </div>
+    <div className="p-4">
+      <div className="flex items-center mb-2">
+        <Rate allowHalf defaultValue={product?.rating} style={{ fontSize: '16px' }} className="custom-rating" count={5} disabled />
+        <span className="text-gray-500 ml-2 text-sm">{product?.rating}</span>
+      </div>
+      <h2 className="text-base font-semibold truncate text-gray-500">{product?.name}</h2>
+      <div className="flex items-baseline mt-2">
+        <span className="text-lg font-medium text-gray-900">TK. {product?.price}</span>
+        <span className="text-sm line-through ml-2 text-gray-500">TK. {product?.price / (1 - product?.discount / 100)}</span>
+      </div>
+      <Button className='bg-primaryColor mt-4 text-white font-medium ' icon={<FaCartShopping />} block  onClick={showModal}>
+        Add to Cart
+      </Button>
+    </div>
+  </div>
+ </Link>
+       {/* Antd Modal */}
+       <ProductModal
         onClose={handleCancel}
         isOrder={isOrder}
         isModalVisible={isModalVisible}
         product={productRef.current}
         title="Choose Size and Color"
       />
-    </div>
+   </div>
+
   );
 };
 

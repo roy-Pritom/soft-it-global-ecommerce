@@ -11,32 +11,33 @@ const PolicyCard = () => {
   const features = [
     {
       id: 1,
-      title: "হাই-কোয়ালিটি পণ্য",
+      title: "High-Quality Products",
       img: quality,
-      details: "উচ্চমানের এবং নির্ভরযোগ্য পণ্য সরবরাহ",
+      details: "Supplying high-quality and reliable products",
     },
     {
       id: 2,
-      title: "24/7 লাইভ সাহায্য",
+      title: "24/7 Live Support",
       img: call,
-      details: "সকল সময়ে গ্রাহক সহায়তা এবং সাহায্য",
+      details: "Customer support and assistance available at all times",
     },
     {
       id: 3,
-      title: "এক্সপ্রেস শিপিং",
+      title: "Express Shipping",
       img: shipped,
-      details: "দ্রুত এবং সুরক্ষিত শিপিং সুবিধা",
+      details: "Fast and secure shipping service",
     },
     {
       id: 4,
-      title: "৭ দিনের রিটার্ন পলিসি",
+      title: "7-Day Return Policy",
       img: returnPlo,
-      details: "৭ দিনের মধ্যে সহজে রিটার্ন করার সুবিধা",
+      details: "Easy returns within 7 days",
     },
   ];
+  
 
   return (
-    <div className="w-full container mx-auto md:px-0 px-8 py-8">
+    <div className="w-full container mx-auto md:px-0 px-8 md:my-20 mt-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 bg-gray-100 py-2">
         {features.map((feature) => (
           <motion.div

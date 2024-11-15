@@ -11,9 +11,9 @@ import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative bg-black text-white py-6 bg-[url('https://cdn.bitcommerz.com/manfare-bd/media/1710417875567-manfare_bd-id-13.jpeg')] bg-cover bg-center ">
+    <footer className="relative  text-white py-6 myfooter ">
       {/* Overlay for black shadow effect */}
-      <div className="absolute inset-0 bg-black opacity-70"></div>
+      <div className="absolute inset-0  opacity-70"></div>
 
       {/* Main content with overlay effect */}
       <div className="relative container mx-auto grid grid-cols-1 md:grid-cols-3 gap-0 px-20">
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
          <div className="flex items-center gap-3">
           <Image src="/website.png" width={24} height={24} className="w-[24px] h-[24px] text-primaryColor" alt="" />
          <Link href='https://maniobd.com' className="text-primaryColor font-bold">
-            ManioBd
+            Maniobd
           </Link>
          </div>
         </div>
@@ -124,12 +124,7 @@ const Footer: React.FC = () => {
           <Image src="/visaCard.svg" alt="Visa" width={60} height={60} className="h-10" />
           <Image src="/nagad.svg" alt="Nagad" width={60} height={60} className="h-10" />
           <Image src="/upay.svg" alt="Upay" width={60} height={60} className="h-10" />
-          <Image src="/visaCard.svg" alt="Visa" width={60} height={60} className="h-10" />
-          <Image src="/nagad.svg" alt="Nagad" width={60} height={60} className="h-10" />
-          <Image src="/upay.svg" alt="Upay" width={60} height={60} className="h-10" />
-          <Image src="/visaCard.svg" alt="Visa" width={60} height={60} className="h-10" />
-          <Image src="/nagad.svg" alt="Nagad" width={60} height={60} className="h-10" />
-          <Image src="/upay.svg" alt="Upay" width={60} height={60} className="h-10" />
+          
           {/* Add more payment option logos as needed */}
         </div>
       </div>
