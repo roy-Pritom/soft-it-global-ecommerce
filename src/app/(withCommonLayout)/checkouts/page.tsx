@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Button, Checkbox, Select, Tooltip } from "antd";
+import { Checkbox, Select, Spin } from "antd";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
@@ -10,10 +10,10 @@ import { useGetCartFilteringQuery } from "@/redux/api/product/productApi";
 import { useEffect, useMemo, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { GiCrossMark } from "react-icons/gi";
 import { useCreateOrderMutation } from "@/redux/api/OrderApi/orderApi";
 import { toast } from "sonner";
 import { clearCart, removeFromCart } from "@/redux/Slice/cartSlice";
+import { TiDelete } from "react-icons/ti";
 
 interface ProductData {
   categoryId: string;
@@ -56,7 +56,9 @@ const CheckOutPage = () => {
   const dispatch = useAppDispatch();
   const { data, isLoading } = useGetCartFilteringQuery({});
   if (isLoading) {
-    <h1>Loading...</h1>;
+    <h1 className=" pt-3 flex justify-center items-center">
+      <Spin />
+    </h1>;
   }
 
   const {
@@ -148,17 +150,21 @@ const CheckOutPage = () => {
     <div className="container mx-auto  grid lg:grid-cols-2 gap-8 py-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="border p-6 rounded-md shadow-sm space-y-4"
+        className=" bg-gray-100 p-6 rounded-md space-y-4"
       >
-        <h2 className="text-xl font-semibold mb-4">Billing Address</h2>
+        <h2 className="text-xl font-semibold mb-4 primaryColor">
+          Billing Address
+        </h2>
 
         <div>
-          <label className="block font-medium mb-1">আপনার নাম</label>
+          <label className="block font-medium  text-slate-700 mb-1">
+            আপনার নাম
+          </label>
           <input
             type="text"
             placeholder="আপনার নাম লিখুন"
             {...register("name", { required: true })}
-            className="w-full p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full p-2 px-6 border border-gray-100 rounded-md focus:outline-none focus:none focus:ring-blue-500"
           />
           {errors.name && (
             <span className="text-red-500">This field is required</span>
@@ -166,7 +172,9 @@ const CheckOutPage = () => {
         </div>
 
         <div>
-          <label className="block font-medium mb-1">আপনার মোবাইল নাম্বার</label>
+          <label className="block font-medium text-slate-700 mb-1">
+            আপনার মোবাইল নাম্বার
+          </label>
           <input
             type="number"
             placeholder="আপনার মোবাইল নাম্বার লিখুন"
@@ -177,7 +185,7 @@ const CheckOutPage = () => {
                 message: "Contact number must be 11 digits",
               },
             })}
-            className="w-full p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-100 px-6 rounded-md focus:outline-none focus:none focus:ring-blue-500"
           />
           {errors.contact && (
             <span className="text-red-500">
@@ -187,13 +195,13 @@ const CheckOutPage = () => {
         </div>
 
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-medium text-slate-700 mb-1">
             আপনার সম্পূর্ণ ঠিকানা
           </label>
           <textarea
             placeholder="আপনার ঠিকানা লিখুন"
             {...register("address", { required: true })}
-            className="w-full p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-100 px-6 rounded-md focus:outline-none focus:none focus:ring-blue-500"
           ></textarea>
           {errors.address && (
             <span className="text-red-500">This field is required</span>
@@ -201,9 +209,11 @@ const CheckOutPage = () => {
         </div>
 
         <div>
-          <label className="block font-medium mb-1">ডেলিভারি চার্জ</label>
+          <label className="block font-medium text-slate-700 mb-1">
+            ডেলিভারি চার্জ
+          </label>
           <Select
-            className="w-full"
+            className="w-full  focus:outline-none focus:none"
             value={watch("deliveryCharge")}
             onChange={(value) => setValue("deliveryCharge", value)}
             options={[
@@ -216,104 +226,188 @@ const CheckOutPage = () => {
         <button
           disabled={creating}
           type="submit"
-          className="w-full bg-primaryColor text-white p-3 rounded-md font-semibold mt-4"
+          className="w-full bg-primaryColor text-white py-2 px-6 rounded-md font-medium mt-4"
         >
           অর্ডার কনফার্ম করুন
         </button>
       </form>
-      <div className="border p-6 rounded-md shadow-sm">
-        <h2 className="text-xl font-semibold mb-4">
+
+      <div className="border border-gray-100 bg-gray-100 p-6 rounded-md ">
+        <h2 className="text-xl font-semibold mb-4 primaryColor">
           Cart - {cartsData.length || 0} items
         </h2>
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr>
-              <th className="border p-2">Image</th>
-              <th className="border p-2">Product Name</th>
-              <th className="border p-2">Quantity</th>
-              <th className="border p-2">Price</th>
-              {/* hello */}
-            </tr>
-          </thead>
-          <tbody>
-            {cartsData.map((item) => (
-              <tr key={item.id}>
-                <td className="border p-2">
-                  <Image
-                    width={64}
-                    height={64}
-                    src={item.photo[0]?.img}
-                    alt={item.name}
-                    className="w-16 h-16 object-cover rounded"
-                  />
-                </td>
-                <td className="border p-2">{item.name}</td>
-                <td className="border p-2">
-                  <div className=" space-y-2">
-                    <div className="flex items-center font-bold gap-4">
-                      <button
-                        className="bg-primaryColor h-6 w-6 rounded-full flex justify-center items-center"
-                        onClick={() => handleQuantityChange(item?.id, false)}
-                      >
-                        <FaMinus size={16} className="text-white font-bold" />
-                      </button>
-                      {quantities[item?.id] || 1}
-                      <button
-                        className="bg-primaryColor h-6 w-6 rounded-full flex justify-center items-center"
-                        onClick={() => handleQuantityChange(item?.id, true)}
-                      >
-                        <FaPlus size={16} className="text-white font-bold" />
-                      </button>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Checkbox.Group
-                        onChange={(checkedValues) =>
-                          handleSizeChange(item.id, checkedValues as string[])
-                        }
-                        value={selectedSizes[item.id] || []}
-                        className="flex flex-wrap gap-2"
-                      >
-                        {item.size.map((size) => (
-                          <Checkbox key={size} value={size}>
-                            {size}
-                          </Checkbox>
-                        ))}
-                      </Checkbox.Group>
-                    </div>
-                  </div>
-                </td>
-                <td className="border p-2">
-                  <div className="flex justify-between items-start">
-                    <h1>Tk- {item.price * (quantities[item.id] || 1)}</h1>
-                    <Tooltip title="Delete">
-                      <Button
-                        onClick={() => dispatch(removeFromCart(item?.id))}
-                        size="small"
-                        icon={<GiCrossMark size={15} />}
-                        danger
-                        className="ml-2"
-                      />
-                    </Tooltip>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
 
-        <div className="mt-4 flex justify-end">
-          <div className="space-y-2 ">
-            <div className="flex justify-between gap-20">
-              <span>সাবটোটাল</span>
-              <span>{subtotal} ৳</span>
+        <div className=" hidden md:block">
+          <table className=" w-full text-left border-collapse">
+            <thead>
+              <tr className=" text-slate-700">
+                <th className="border p-2 text-sm md:text-base">Image</th>
+                <th className="border p-2 text-sm md:text-base ">Name</th>
+                <th className="border p-2 text-sm md:text-base ">Quantity</th>
+                <th className="border p-2 text-sm md:text-base ">Price</th>
+                {/* hello */}
+              </tr>
+            </thead>
+            <tbody>
+              {cartsData.map((item) => (
+                <tr key={item.id}>
+                  <td className="border p-2">
+                    <Image
+                      width={64}
+                      height={64}
+                      src={item.photo[0]?.img}
+                      alt={item.name}
+                      className="w-16 h-16 object-cover rounded"
+                    />
+                  </td>
+                  <td className="border p-2 text-sm md:text-base">
+                    {item.name}
+                  </td>
+                  <td className="border p-2">
+                    <div className=" space-y-2">
+                      <div className="flex items-center font-bold gap-4">
+                        <button
+                          className="bg-primaryColor h-6 w-6 rounded-full flex justify-center items-center"
+                          onClick={() => handleQuantityChange(item?.id, false)}
+                        >
+                          <FaMinus size={12} className="text-white font-bold" />
+                        </button>
+                        {quantities[item?.id] || 1}
+                        <button
+                          className="bg-primaryColor h-6 w-6 rounded-full flex justify-center items-center"
+                          onClick={() => handleQuantityChange(item?.id, true)}
+                        >
+                          <FaPlus size={12} className="text-white font-bold" />
+                        </button>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-1 md:gap-2">
+                        <Checkbox.Group
+                          onChange={(checkedValues) =>
+                            handleSizeChange(item.id, checkedValues as string[])
+                          }
+                          value={selectedSizes[item.id] || []}
+                          className="flex flex-wrap gap-1 md:gap-2"
+                        >
+                          {item.size.map((size) => (
+                            <Checkbox key={size} value={size}>
+                              {size}
+                            </Checkbox>
+                          ))}
+                        </Checkbox.Group>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="border p-2 relative">
+                    <div className="flex justify-between items-start text-sm md:text-base">
+                      <h1>Tk- {item.price * (quantities[item.id] || 1)}</h1>
+                    </div>
+                    <div
+                      onClick={() => dispatch(removeFromCart(item?.id))}
+                      className="absolute top-0 right-0 cursor-pointer "
+                    >
+                      <TiDelete className=" w-6 h-6 text-red-400" />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className=" block md:hidden">
+          <table className=" w-full text-left border-collapse">
+            <thead>
+              <tr className=" text-slate-700">
+                <th className="border p-2 text-sm md:text-base">Image</th>
+                <th className="border p-2 text-sm md:text-base ">
+                  Product Information
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartsData.map((item) => (
+                <tr key={item.id}>
+                  <td className="border p-2">
+                    <Image
+                      width={64}
+                      height={64}
+                      src={item.photo[0]?.img}
+                      alt={item.name}
+                      className="w-16 h-16 object-cover rounded"
+                    />
+                  </td>
+                  <td className="border px-6 py-2 space-y-2 text-sm md:text-base relative">
+                    <h1> {item.name}</h1>
+                    <div className=" space-y-2">
+                      <div className="flex items-center font-bold gap-4">
+                        <button
+                          className=" bg-gray-200   h-6 w-6 rounded-full flex justify-center items-center"
+                          onClick={() => handleQuantityChange(item?.id, false)}
+                        >
+                          <FaMinus
+                            size={12}
+                            className="text-slate-800 font-bold"
+                          />
+                        </button>
+                        {quantities[item?.id] || 1}
+                        <button
+                          className="bg-gray-200  h-6 w-6 rounded-full flex justify-center items-center"
+                          onClick={() => handleQuantityChange(item?.id, true)}
+                        >
+                          <FaPlus
+                            size={12}
+                            className=" text-slate-800 font-bold"
+                          />
+                        </button>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-1 md:gap-2">
+                        <Checkbox.Group
+                          onChange={(checkedValues) =>
+                            handleSizeChange(item.id, checkedValues as string[])
+                          }
+                          value={selectedSizes[item.id] || []}
+                          className="flex flex-wrap gap-1 md:gap-2"
+                        >
+                          {item.size.map((size) => (
+                            <Checkbox key={size} value={size}>
+                              {size}
+                            </Checkbox>
+                          ))}
+                        </Checkbox.Group>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-start text-sm md:text-base">
+                      <h1>Tk- {item.price * (quantities[item.id] || 1)}</h1>
+                    </div>
+                    <div
+                      onClick={() => dispatch(removeFromCart(item?.id))}
+                      className="absolute top-0 right-0 cursor-pointer "
+                    >
+                      <TiDelete className=" w-6 h-6 text-red-400" />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="mt-4 w-full">
+          <div className="space-y-2 text-slate-700  text-sm md:text-base">
+            <div className="flex justify-end gap-20">
+              <span>সাবটোটাল :</span>
+              <span>{subtotal} Tk</span>
             </div>
-            <div className="flex justify-between gap-20">
-              <span>ডেলিভারি চার্জ</span>
-              <span>{deliveryCharge} ৳</span>
+            <div className=" border border-b border-gray-200 w-full"></div>
+            <div className="flex justify-end gap-24">
+              <span className=" mr-1">ডেলিভারি চার্জ : </span>
+              <span> {deliveryCharge} Tk</span>
             </div>
-            <div className="flex justify-between gap-20 font-semibold">
-              <span>টোটাল</span>
-              <span>{totalPrice} ৳</span>
+            <div className=" border border-b border-gray-200 w-full"></div>
+            <div className="flex justify-end gap-20 font-semibold">
+              <span>টোটাল : </span>
+              <span>{totalPrice} Tk</span>
             </div>
           </div>
         </div>
