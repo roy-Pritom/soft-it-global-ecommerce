@@ -6,6 +6,7 @@ import React, { useRef, useState } from "react";
 import ProductModal from "../Modal/ProductModal";
 import { Button, Rate } from "antd";
 import { FaCartShopping } from "react-icons/fa6";
+import Link from "next/link";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 const MYProductCard = ({ product }: { product: any }) => {
@@ -27,7 +28,8 @@ const MYProductCard = ({ product }: { product: any }) => {
   return (
    
    <div className="w-full">
-     <div className="max-w-sm rounded-lg shadow-md overflow-hidden border border-gray-200">
+ <Link href={`/order/${product.id}`}>
+ <div className="max-w-sm rounded-lg shadow-md overflow-hidden border border-gray-200">
     <div className="relative w-full h-64">
       {/* <Fade> */}
       <Image src={product?.photo[0]?.img} alt='productImg' layout="fill" objectFit="cover" />
@@ -48,6 +50,7 @@ const MYProductCard = ({ product }: { product: any }) => {
       </Button>
     </div>
   </div>
+ </Link>
        {/* Antd Modal */}
        <ProductModal
         onClose={handleCancel}

@@ -6,6 +6,10 @@ import { useGetAllProductByCategoryQuery } from "@/redux/api/category/categoryAp
 import { useGetSingleProductQuery } from "@/redux/api/product/productApi";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 
 interface ProductParams {
   productId: string;
@@ -14,6 +18,7 @@ interface ProductParams {
 const ProductViewPage = ({ params }: { params: ProductParams }) => {
   const productId = params?.productId;
   const { data, isLoading } = useGetSingleProductQuery(productId);
+  const [activeSection, setActiveSection] = useState("description"); // default section
 
   if (isLoading) {
     <h1>Loading...</h1>;
@@ -44,17 +49,21 @@ const ProductViewPage = ({ params }: { params: ProductParams }) => {
   return (
     <div className="container mx-auto py-10 md:px-0 px-8">
       <div>
-        <div className=" grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className=" grid grid-cols-1 md:grid-cols-2 h-full gap-12">
+          {/* First Div */}
           <div className=" bg-gray-100 w-full flex flex-col justify-center mx-auto overflow-hidden p-5">
-            <div className="overflow-hidden h-96 w-full flex justify-center  mx-auto">
+            <div className="overflow-hidden h-96 w-full flex justify-center mx-auto ">
               {selectedImage && (
-                <Image
-                  src={selectedImage}
-                  alt="Selected product"
-                  width={500}
-                  height={500}
-                  className="rounded-lg h-full"
-                />
+                <Zoom>
+                  <Image
+                    src={selectedImage}
+                    alt="Selected product"
+                    width={500}
+                    height={500}
+                    className="rounded-lg h-full transition-all duration-500 ease-in-out transform"
+                    style={{ transition: "transform 0.5s ease-in-out" }}
+                  />
+                </Zoom>
               )}
             </div>
             {/* Thumbnails */}
@@ -86,9 +95,47 @@ const ProductViewPage = ({ params }: { params: ProductParams }) => {
               ))}
             </div>
           </div>
-          <div>
+          {/* Second Div */}
+          <div className="flex flex-col h-full">
             <ViewProductInformation productData={productData} />
           </div>
+        </div>
+
+        <div className="mt-8 space-x-6">
+          <button
+            onClick={() => setActiveSection("description")}
+            className={`px-8 py-2 uppercase ${
+              activeSection === "description"
+                ? "bg-primaryColor text-white"
+                : "bg-gray-100 text-slate-800"
+            }`}
+          >
+            Description
+          </button>
+          <button
+            onClick={() => setActiveSection("delivery")}
+            className={`px-8 py-2 uppercase ${
+              activeSection === "delivery"
+                ? "bg-primaryColor text-white"
+                : "bg-gray-100 text-slate-800"
+            }`}
+          >
+            Delivery Options
+          </button>
+        </div>
+        <div className="mt-4">
+          {activeSection === "description" ? (
+            <ReactQuill
+              value={productData?.description || ""}
+              readOnly={true}
+              theme="bubble"
+              className="text-slate-800 bg-gray-50 p-4 rounded-lg"
+            />
+          ) : (
+            <div className="text-slate-800 bg-gray-50 p-4 rounded-lg">
+              {productData?.delivery}
+            </div>
+          )}
         </div>
       </div>
 
