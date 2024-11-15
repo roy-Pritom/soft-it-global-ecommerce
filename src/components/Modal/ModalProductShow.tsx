@@ -26,7 +26,7 @@ const ModalProductShow = ({ productData }: { productData: any }) => {
         : [...prevSizes, size]
     );
   };
-
+  //Addd
   const handleOrderToCartProduct = (productId: string) => {
     dispatch(addToCart(productId));
     toast.success("Add Successfully !");
