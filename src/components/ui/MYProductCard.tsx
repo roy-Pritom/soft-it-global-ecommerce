@@ -28,7 +28,7 @@ const MYProductCard = ({ product }: { product: any }) => {
   return (
    
    <div className="w-full">
- <Link href={`/order/${product.id}`}>
+ <Link href={`/view/${product.id}`}>
  <div className="max-w-sm rounded-lg shadow-md overflow-hidden border border-gray-200">
     <div className="relative w-full h-64">
       {/* <Fade> */}
