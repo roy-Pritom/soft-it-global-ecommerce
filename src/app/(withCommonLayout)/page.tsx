@@ -1,27 +1,27 @@
 import FeatureProduct from "@/components/HomePageComponents/FeatureProduct";
 import FeatureProductSlider from "@/components/HomePageComponents/FeatureProductSlider/FeatureProductSlider";
 import Hero from "@/components/HomePageComponents/Hero";
-// import MenProducts from "@/components/HomePageComponents/MenProducts/MenProducts";
-// import ProductShowContainer from "@/components/HomePageComponents/ProductShowContainer";
 import PopularCategory from "@/components/HomePageComponents/ProductsTabs/PopularCategory/PopularCategory";
-import Saree from "@/components/HomePageComponents/Saree";
-import TShirt from "@/components/HomePageComponents/TShirt";
+import ManFashion from "@/components/HomePageComponents/ManFashion";
 import WomenFashion from "@/components/HomePageComponents/WomenFashion";
 import PolicyCard from "@/components/shared/PolicyCard";
+import CategoryBasedProductContainer1 from "@/components/HomePageComponents/CategoryBasedProductContainer1";
+import CategoryBasedProductContainer2 from "@/components/HomePageComponents/CategoryBasedProductContainer2";
 
 export default function Home() {
-  // fdew
   return (
-    <div className="container mx-auto ">
+    <div className=" ">
       <Hero />
-      <PopularCategory />
-      <FeatureProduct />
-      <FeatureProductSlider />
-      <TShirt />
-      <WomenFashion />
-      <Saree />
-      {/* <ProductShowContainer /> */}
-      <PolicyCard />
+      <div className="container mx-auto">
+        <PopularCategory />
+        <FeatureProduct />
+        <FeatureProductSlider />
+        <ManFashion />
+        <CategoryBasedProductContainer1 />
+        <WomenFashion />
+        <CategoryBasedProductContainer2 />
+        <PolicyCard />
+      </div>
     </div>
   );
 }
