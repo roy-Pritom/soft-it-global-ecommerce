@@ -9,6 +9,7 @@ import CategoryBasedProductContainer1 from "@/components/HomePageComponents/Cate
 import CategoryBasedProductContainer2 from "@/components/HomePageComponents/CategoryBasedProductContainer2";
 
 export default function Home() {
+  // home
   return (
     <div className=" ">
       <Hero />
