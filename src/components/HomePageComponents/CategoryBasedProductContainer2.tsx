@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useGetAllProductByCategoryQuery } from "@/redux/api/category/categoryApi";
+import { useGetAllCategoryQuery, useGetAllProductByCategoryQuery } from "@/redux/api/category/categoryApi";
 import { categorySettings } from "@/utils/slideSeetings";
 import Image from "next/image";
 import Slider from "react-slick";
@@ -35,8 +35,10 @@ const CustomNextArrow = (props: any) => {
 };
 
 const CategoryBasedProductContainer2 = () => {
-//   const id = "a0ceb79f-6ce3-4ad2-8c96-479f1e9c4a4b";
-const id = "f0b81a15-b94c-491d-84fc-f1d0ca176208";
+  const {data:categoryData}=useGetAllCategoryQuery({});
+  const categoryFeatureData = categoryData?.data?.data?.filter((i:any)=>i.isFeature===true)  || [];
+  // console.log(categoryFeatureData)
+  const id =categoryFeatureData?.length > 1  ? categoryFeatureData[1]?.id :  '';
   const { data } = useGetAllProductByCategoryQuery(id);
   const productData = data?.data?.data;
 
@@ -52,7 +54,7 @@ const id = "f0b81a15-b94c-491d-84fc-f1d0ca176208";
       <div className="flex md:flex-row flex-col gap-5">
         {/* Left Image */}
         <Image
-          src="https://cdn.bitcommerz.com/manfarebd/media/1727353458020-manfarebd-id-13.jpeg"
+          src="/f2.jpeg"
           alt="category"
           width={350}
           height={400}

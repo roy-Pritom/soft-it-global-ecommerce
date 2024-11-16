@@ -9,6 +9,7 @@ import Image from "next/image";
 
 const BannerSlider = () => {
   const { data, isLoading } = useGetAllBannerQuery({});
+  // console.log('banner',data?.data?.data)
   
   if (isLoading) {
     return (
@@ -16,7 +17,7 @@ const BannerSlider = () => {
     );
   }
 
-  const bannerData = data?.data?.data || [];
+  const bannerData = data?.data?.data?.filter((i:any)=>i.type==='banner')  || [];
 
   return (
     <div className="w-full bg-black">

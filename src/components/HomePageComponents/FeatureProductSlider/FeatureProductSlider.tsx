@@ -15,7 +15,7 @@ const FeatureProductSlider = () => {
     return <h1 className="text-center pt-3">Loading...</h1>;
   }
 
-  const bannerData = data?.data?.data || [];
+  const bannerData = data?.data?.data?.filter((i:any)=>i.type==='add')  || [];
   return (
     <div className=" md:px-0 px-8">
       <Swiper

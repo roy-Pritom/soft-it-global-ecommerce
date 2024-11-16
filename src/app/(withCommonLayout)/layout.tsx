@@ -1,5 +1,4 @@
 "use client"
-import CheckOutBox from "@/components/shared/CheckOutBox";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import Link from "next/link";

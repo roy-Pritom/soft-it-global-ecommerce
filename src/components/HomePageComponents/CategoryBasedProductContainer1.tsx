@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useGetAllProductByCategoryQuery } from "@/redux/api/category/categoryApi";
+import { useGetAllCategoryQuery, useGetAllProductByCategoryQuery } from "@/redux/api/category/categoryApi";
 import { categorySettings } from "@/utils/slideSeetings";
 import Image from "next/image";
 import Slider from "react-slick";
@@ -35,10 +35,11 @@ const CustomNextArrow = (props: any) => {
 };
 
 const CategoryBasedProductContainer1 = () => {
-  const id = "f0b81a15-b94c-491d-84fc-f1d0ca176208";
+  const {data:categoryData}=useGetAllCategoryQuery({});
+  const categoryFeatureData = categoryData?.data?.data?.filter((i:any)=>i.isFeature===true)  || [];
+  const id =categoryFeatureData?.length  ? categoryFeatureData[0]?.id :  '';
   const { data } = useGetAllProductByCategoryQuery(id);
   const productData = data?.data?.data;
-
   // Slider settings with custom arrows
   const settings = {
     ...categorySettings,
@@ -51,7 +52,7 @@ const CategoryBasedProductContainer1 = () => {
       <div className="flex md:flex-row flex-col gap-5">
         {/* Left Image */}
         <Image
-          src="https://cdn.bitcommerz.com/manfarebd/media/1727353441170-manfarebd-id-13.jpeg"
+          src="/f1.jpeg"
           alt="category"
           width={350}
           height={400}
