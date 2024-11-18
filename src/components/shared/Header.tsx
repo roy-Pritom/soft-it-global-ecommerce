@@ -27,7 +27,7 @@ const Header = () => {
     router.push(`/shop?searchTerm=${value}`);
     setSearchTerm("");
   };
-
+// navbar
   const showDrawer = () => {
     setVisible(true);
   };
