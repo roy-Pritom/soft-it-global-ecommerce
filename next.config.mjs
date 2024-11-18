@@ -8,6 +8,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental:{
+    disableOptimizedRendering:true,
+  }
 };
 
 export default nextConfig;
