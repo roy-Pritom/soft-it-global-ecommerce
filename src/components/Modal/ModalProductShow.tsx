@@ -103,7 +103,7 @@ const ModalProductShow = ({ productData }: { productData: any }) => {
         <div className=" max-w-xs flex  items-center gap-3 bg-slate-700 text-white mt-4 rounded-full px-6 py-1">
           <BiPhone className=" h-7 w-7" />
           <div>
-            <h1 className=" text-sm">+880 1711979475</h1>
+            <h1 className=" text-xs">+880 1711979475</h1>
             <p className=" text-xs pl-2">CALL US NOW</p>
           </div>
         </div>

@@ -152,7 +152,7 @@ const CheckOutPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className=" bg-gray-100 p-6 rounded-md space-y-4"
       >
-        <h2 className="text-xl font-semibold mb-4 primaryColor">
+        <h2 className="text-2xl font-semibold mb-4 primaryColor oswaldRegular">
           Billing Address
         </h2>
 
@@ -233,7 +233,7 @@ const CheckOutPage = () => {
       </form>
 
       <div className="border border-gray-100 bg-gray-100 p-6 rounded-md ">
-        <h2 className="text-xl font-semibold mb-4 primaryColor">
+        <h2 className="text-2xl oswaldRegular font-semibold mb-4 primaryColor">
           Cart - {cartsData.length || 0} items
         </h2>
 
@@ -394,7 +394,7 @@ const CheckOutPage = () => {
         </div>
 
         <div className="mt-4 w-full">
-          <div className="space-y-2 text-slate-700  text-sm md:text-base">
+          <div className="space-y-2 text-slate-700 oswaldRegular  text-sm md:text-base">
             <div className="flex justify-end gap-20">
               <span>সাবটোটাল :</span>
               <span>{subtotal} Tk</span>

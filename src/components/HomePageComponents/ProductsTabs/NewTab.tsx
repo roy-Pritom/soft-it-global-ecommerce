@@ -22,7 +22,7 @@ const NewTab = () => {
   }
   return (
     <div className="pb-20">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 w-full mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full mx-auto">
         {products?.map((product: any) => (
           <MYProductCard key={product?.id} product={product} />
         ))}

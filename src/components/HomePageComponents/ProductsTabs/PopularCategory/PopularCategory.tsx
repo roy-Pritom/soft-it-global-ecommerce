@@ -4,12 +4,12 @@ import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./PopularCategory.css";
-import {  Fade } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
 import Link from "next/link";
 import { useGetAllCategoryQuery } from "@/redux/api/category/categoryApi";
 import CategoryLoading from "../../LazyLoadingComponents/CategoryLoading";
-import { Button} from "antd";
-import 'swiper/swiper-bundle.css';
+import { Button } from "antd";
+import "swiper/swiper-bundle.css";
 import Slider from "react-slick";
 import { settings } from "@/utils/slideSeetings";
 
@@ -32,35 +32,34 @@ const PopularCategory = () => {
   return (
     <div className="my-14 md:px-0 px-8">
       <Fade>
-        <p className="text-2xl font-bold mb-10 text-center primaryColor">
+        <p className="text-3xl font-bold mb-10 text-center primaryColor oswaldRegular">
           Popular Categories
         </p>
       </Fade>
 
-      {/* <div className=" grid grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6"> */}
       <Slider {...settings}>
-      {categoryData?.map((item:any) => (
-        <Link href={`/shop/${item?.id}`} key={item?.id}>
-          <div className="w-[300px] h-[234px] cursor-pointer transform transition duration-300 ease-in-out hover:scale-105 rounded-md p-0 relative">
-            <Image
-              src={item?.img}
-              alt="img"
-              width={300}
-              height={234}
-              className="mx-auto w-[300px] h-[234px]  rounded-md"
-            />
-            <div className="flex justify-center items-center">
-              <Button
-                size="large"
-                className="bg-white hover:bg-black text-primaryColor font-semibold text-[1.12rem] px-7 absolute bottom-5 border-none shadow-lg"
-              >
-                {item?.name}
-              </Button>
+        {categoryData?.map((item: any) => (
+          <Link href={`/shop/${item?.id}`} key={item?.id}>
+            <div className="w-[300px] h-[234px] bg-gray-100 cursor-pointer transform transition duration-300 ease-in-out hover:scale-105 rounded-md p-0 relative">
+              <Image
+                src={item?.img}
+                alt="img"
+                width={300}
+                height={234}
+                className="mx-auto w-[300px] h-[234px]  rounded-md p-3"
+              />
+              <div className="flex justify-center items-center">
+                <Button
+                  size="large"
+                  className="bg-white hover:bg-[#b3b366] hover:text-white text-primaryColor font-semibold oswaldRegular text-[1.12rem] px-7 absolute bottom-5 border-none"
+                >
+                  {item?.name}
+                </Button>
+              </div>
             </div>
-          </div>
-        </Link>
-      ))}
-    </Slider>
+          </Link>
+        ))}
+      </Slider>
       {/* </div> */}
     </div>
   );

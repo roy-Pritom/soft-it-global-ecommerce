@@ -31,13 +31,11 @@ const WomenFashion = () => {
     );
   }
 
-
-
   return (
     <div className="md:my-20 my-10 md:px-0 px-8">
-      <div className="bg-gray-200 p-8 rounded-md mb-14 flex justify-between">
-        <p className=" text-xl sm:text-2xl md:text-3xl uppercase font-bold primaryColor">
-          Women Fashion
+      <div className="bg-gray-100 px-10 py-5 rounded-md mb-14 flex justify-between">
+        <p className=" oswaldRegular text-xl sm:text-3xl md:text-3xl uppercase font-bold text-primaryColor">
+          Women
         </p>
         <Link href="/product?womanFashion">
           <Button
@@ -52,7 +50,7 @@ const WomenFashion = () => {
       </div>
       <Slider {...settings}>
         {womanData?.slice(0, 10).map((item: any) => (
-                   <MYProductCard product={item} key={item.id}/>
+          <MYProductCard product={item} key={item.id} />
         ))}
       </Slider>
     </div>
