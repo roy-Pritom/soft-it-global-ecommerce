@@ -34,7 +34,6 @@ const PolicyCard = () => {
       details: "Easy returns within 7 days",
     },
   ];
-  
 
   return (
     <div className="w-full container mx-auto md:px-0 px-8 md:my-20 mt-10">
@@ -57,7 +56,7 @@ const PolicyCard = () => {
                 className="w-full text-primaryColor"
               />
             </motion.div>
-            <h3 className="text-lg font-semibold mb-2 text-center">
+            <h3 className="text-2xl text-slate-800 font-semibold mb-2 text-center oswaldRegular">
               {feature.title}
             </h3>
             <p className="text-gray-600 text-center">{feature.details}</p>

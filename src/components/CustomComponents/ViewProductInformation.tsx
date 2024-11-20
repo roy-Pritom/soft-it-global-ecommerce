@@ -2,6 +2,7 @@
 "use client";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/Slice/cartSlice";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { BiPhone } from "react-icons/bi";
 import {
@@ -20,6 +21,7 @@ const ViewProductInformation = ({ productData }: { productData: any }) => {
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [quantity, setQuantity] = useState<number>(1);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleSizeChange = (size: string) => {
     setSelectedSizes((prevSizes) =>
@@ -36,12 +38,13 @@ const ViewProductInformation = ({ productData }: { productData: any }) => {
   const handleOrderToCartProduct = (productId: string) => {
     dispatch(addToCart(productId));
     toast.success("Add Successfully !");
+    router.push("/checkouts");
   };
 
   return (
     <div className=" bg-gray-100 p-5  h-full">
       <div>
-        <h2 className="text-lg font-semibold primaryColor">
+        <h2 className="text-2xl oswaldRegular font-semibold primaryColor">
           {productData?.name}
         </h2>
         <p className="text-slate-900 text-lg">Tk- {productData?.price}</p>
@@ -95,16 +98,16 @@ const ViewProductInformation = ({ productData }: { productData: any }) => {
       <div className=" mt-4 border-b border-gray-300"></div>
       <div className=" flex items-center gap-8 pt-6">
         <button
-          onClick={() => handleOrderToCartProduct(productData?.id)}
-          className="bg-primaryColor w-full font-medium text-white py-2 px-4 flex justify-center items-center gap-3"
+          onClick={() => handleAddToCartProduct(productData?.id)}
+          className="bg-primaryColor oswaldRegular rounded-full w-full font-medium text-white py-2 px-4 flex justify-center items-center gap-3"
         >
           {" "}
           Add To Cart
           <FaShoppingCart />
         </button>
         <button
-          onClick={() => handleAddToCartProduct(productData?.id)}
-          className="bg-primaryColor  w-full font-medium text-white py-2 px-4 flex justify-center items-center gap-3"
+          onClick={() => handleOrderToCartProduct(productData?.id)}
+          className="bg-primaryColor oswaldRegular rounded-full  w-full font-medium text-white py-2 px-4 flex justify-center items-center gap-3"
         >
           {" "}
           Buy Now <FaCreditCard />
@@ -119,7 +122,7 @@ const ViewProductInformation = ({ productData }: { productData: any }) => {
         <BiPhone className=" h-9 w-9" />
         <div>
           <h1 className=" text-base">+880 1711979475</h1>
-          <h1 className=" text-base pl-2">CALL US NOW</h1>
+          <h1 className=" text-sm pl-2">CALL US NOW</h1>
         </div>
       </div>
       <div className="flex items-center gap-3 mt-6">

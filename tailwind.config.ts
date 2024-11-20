@@ -13,14 +13,18 @@ const config: Config = {
         foreground: "var(--foreground)",
         primaryColor: "#808000",
       },
+      fontFamily: {
+        lato: ["Lato", "sans-serif"],
+        oswald: ["Oswald", "sans-serif"],
+      },
       container: {
         center: true, // Center the container by default
-        padding: '1rem', // Add padding for small screens
+        padding: "1rem", // Add padding for small screens
         screens: {
-          sm: '640px',   // Small devices (mobile)
-          md: '768px',   // Medium devices (tablet)
-          lg: '1380px',  // Large devices (laptop)
-          xl: '1600px',  // Extra large devices (desktop)
+          sm: "640px", // Small devices (mobile)
+          md: "768px", // Medium devices (tablet)
+          lg: "1380px", // Large devices (laptop)
+          xl: "1600px", // Extra large devices (desktop)
         },
       },
     },

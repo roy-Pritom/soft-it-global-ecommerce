@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { FaBars } from "react-icons/fa";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import { List } from "antd";
 import Link from "next/link";
 import { useGetAllCategoryQuery } from "@/redux/api/category/categoryApi";
 
-const NavMenu = ({onClose2}:{onClose2:() => void}) => {
+const NavMenu = ({ onClose2 }: { onClose2: () => void }) => {
   // Fetching categories
   const { data, isLoading } = useGetAllCategoryQuery({});
   const categoryData = data?.data?.data || [];
@@ -35,28 +33,29 @@ const NavMenu = ({onClose2}:{onClose2:() => void}) => {
 
   return (
     <div className="p-0">
-      <div className="bg-primaryColor flex justify-between px-4 items-center cursor-pointer">
-        <div className="flex items-center gap-3">
-          <FaBars className="text-white" />
-          <p className="text-white font-semibold lg:text-base md:text-sm hidden md:block">
-            BROWSE CATEGORIES
-          </p>
-        </div>
-        <RiArrowDropDownLine size={30} className="text-white" />
-      </div>
-      <div className="w-full p-4 bg-white rounded-lg shadow-md">
+      <div className="w-full p-4 bg-white text-slate-800">
         <List
-        className="h-96 overflow-y-auto "
+          className="h-96 overflow-y-auto "
           dataSource={menuItems || []}
           renderItem={(item: any) => (
             <Link href={item.path} key={item?.key} onClick={onClose2}>
-              <List.Item className="border-b last:border-b-0">
+              <List.Item className="border-b last:border-b-0 hover:bg-gray-100 ">
                 <span className="text-lg font-medium">{item?.label}</span>
               </List.Item>
               <hr />
             </Link>
           )}
         />
+        <Link href="/product?manFashion">
+          <h1 className=" border-b text-base font-medium  py-2 hover:bg-gray-100 hover:text-slate-800">
+            Man
+          </h1>
+        </Link>
+        <Link href="/product?womanFashion">
+          <h1 className="text-base font-medium  py-2 hover:bg-gray-100 hover:text-slate-800">
+            Woman
+          </h1>
+        </Link>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "MANIO",
   description: "MANIO ECOM",
   icons: {
-    icon: "/Logo/manio-logo.png",
+    icon: "/iconnew.png",
   },
 };
 

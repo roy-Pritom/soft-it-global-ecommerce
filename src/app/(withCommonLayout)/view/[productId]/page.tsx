@@ -8,8 +8,8 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import ImageShow from "@/components/ui/ImageShow";
 
 interface ProductParams {
   productId: string;
@@ -53,18 +53,7 @@ const ProductViewPage = ({ params }: { params: ProductParams }) => {
           {/* First Div */}
           <div className=" bg-gray-100 w-full flex flex-col justify-center mx-auto overflow-hidden p-5">
             <div className="overflow-hidden h-96 w-full flex justify-center mx-auto ">
-              {selectedImage && (
-                <Zoom>
-                  <Image
-                    src={selectedImage}
-                    alt="Selected product"
-                    width={500}
-                    height={500}
-                    className="rounded-lg h-full transition-all duration-500 ease-in-out transform"
-                    style={{ transition: "transform 0.5s ease-in-out" }}
-                  />
-                </Zoom>
-              )}
+              {selectedImage && <ImageShow selectedImage={selectedImage} />}
             </div>
             {/* Thumbnails */}
             <div className="w-full flex justify-center  mx-auto gap-2 mt-4">
@@ -104,7 +93,7 @@ const ProductViewPage = ({ params }: { params: ProductParams }) => {
         <div className="mt-8 space-x-6">
           <button
             onClick={() => setActiveSection("description")}
-            className={`px-8 py-2 uppercase ${
+            className={`px-8 py-2 oswaldRegular uppercase ${
               activeSection === "description"
                 ? "bg-primaryColor text-white"
                 : "bg-gray-100 text-slate-800"
@@ -114,7 +103,7 @@ const ProductViewPage = ({ params }: { params: ProductParams }) => {
           </button>
           <button
             onClick={() => setActiveSection("delivery")}
-            className={`px-8 py-2 uppercase ${
+            className={`px-8 py-2 oswaldRegular uppercase ${
               activeSection === "delivery"
                 ? "bg-primaryColor text-white"
                 : "bg-gray-100 text-slate-800"

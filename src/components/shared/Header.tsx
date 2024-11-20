@@ -42,11 +42,11 @@ const Header = () => {
     setVisible2(false);
   };
   return (
-    <div className=" py-3 bg-black border- border-red-400 h-[120px] ">
+    <div className=" py-3 bg-black h-[100px] md:h-[120px] ">
       <div className="flex justify-between items-center container mx-auto -mt-5">
         <Link href="/">
           <Image
-            src="/Logo/manio-logo.png"
+            src="/Logo/Manio logonn.png"
             width={150}
             height={50}
             className=""
@@ -68,7 +68,7 @@ const Header = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaWhatsapp className="hidden md:block" size={25} color="white" />
+            <FaWhatsapp className="hidden md:block text-green-500" size={25} />
           </Link>
           <Link href="tel:+8801861714318">
             <MdCall className="hidden md:block" size={25} color="white" />
@@ -132,7 +132,7 @@ const Header = () => {
                 </div>
               }
             >
-              <NavMenu onClose2={onClose2}/>
+              <NavMenu onClose2={onClose2} />
             </ReusableDrawer>
           </div>
         </div>

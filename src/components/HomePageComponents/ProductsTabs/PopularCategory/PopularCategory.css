@@ -1,14 +1,13 @@
 /* PopularCategory.css or global CSS file */
 .slick-prev:before,
 .slick-next:before {
-    color: black;
-    /* Set arrow color to black */
-    font-size: 24px;
-    /* Optional: Adjust icon size */
+  background-color: #808000;
+  font-size: 40px;
+  border-radius: 100%;
 }
 
 /* PopularCategory.css */
-.slick-slide>div {
-    margin: 0 10px;
-    /* Adjusts horizontal spacing between each slide */
+.slick-slide > div {
+  margin: 0 10px;
+  /* Adjusts horizontal spacing between each slide */
 }

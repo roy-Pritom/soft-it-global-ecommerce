@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
+import ImageShow from "../ui/ImageShow";
 
 const ModalImageShow = ({ productData }: { productData: any }) => {
   console.log("Data", productData);
@@ -23,18 +23,7 @@ const ModalImageShow = ({ productData }: { productData: any }) => {
   return (
     <div className=" bg-gray-100 w-full h-full flex flex-col justify-center mx-auto rounded-md overflow-hidden p-5">
       <div className="overflow-hidden h-80 w-full flex justify-center mx-auto ">
-        {selectedImage && (
-          <Zoom>
-            <Image
-              src={selectedImage}
-              alt="Selected product"
-              width={500}
-              height={500}
-              className="rounded-lg h-full transition-all duration-500 ease-in-out transform"
-              style={{ transition: "transform 0.5s ease-in-out" }}
-            />
-          </Zoom>
-        )}
+        {selectedImage && <ImageShow selectedImage={selectedImage} />}
       </div>
       {/* Thumbnails */}
       <div className="w-full flex justify-center  mx-auto gap-2 mt-4">
