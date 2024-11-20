@@ -8,10 +8,14 @@ import {
 } from "@ant-design/icons";
 import Image from "next/image";
 import Link from "next/link";
+import bgFooter from "../../../public/footerbg.png";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative  text-white py-6 myfooter ">
+    <footer
+      className="relative text-white py-6 myfooter bg-contain bg-center"
+      style={{ backgroundImage: `url(${bgFooter.src})` }} // Apply the imported background image here
+    >
       {/* Overlay for black shadow effect */}
       <div className="absolute inset-0  opacity-70"></div>
 
@@ -26,7 +30,6 @@ const Footer: React.FC = () => {
               width={100}
               height={10}
               className=""
-        
             />
           </div>
           <p className="text-gray-400">be exclusive . be you</p>
@@ -94,15 +97,25 @@ const Footer: React.FC = () => {
         <div className="space-y-4">
           <h3 className="font-semibold text-lg">CONTACT INFO</h3>
           <p className="text-gray-400">
-          Baridhara, Block-J, Road-2B, Twin Brooks, House-8, Flat-B2, Gulshan, Dhaka 1212.
+            Baridhara, Block-J, Road-2B, Twin Brooks, House-8, Flat-B2, Gulshan,
+            Dhaka 1212.
           </p>
           <p className="text-gray-400">manioofficial@gmail.com</p>
-         <div className="flex items-center gap-3">
-          <Image src="/website.png" width={24} height={24} className="w-[24px] h-[24px] text-primaryColor" alt="" />
-         <Link href='https://maniobd.com' className="text-primaryColor font-bold">
-            Maniobd
-          </Link>
-         </div>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/website.png"
+              width={24}
+              height={24}
+              className="w-[24px] h-[24px] text-primaryColor"
+              alt=""
+            />
+            <Link
+              href="https://maniobd.com"
+              className="text-primaryColor font-bold"
+            >
+              Maniobd
+            </Link>
+          </div>
         </div>
 
         {/* Ad Image */}
@@ -121,10 +134,28 @@ const Footer: React.FC = () => {
       <div className="relative container mx-auto mt-1">
         <h3 className="text-lg font-semibold text-center mb-4">Pay With</h3>
         <div className="flex justify-center space-x-4 flex-wrap">
-          <Image src="/visaCard.svg" alt="Visa" width={60} height={60} className="h-10" />
-          <Image src="/nagad.svg" alt="Nagad" width={60} height={60} className="h-10" />
-          <Image src="/upay.svg" alt="Upay" width={60} height={60} className="h-10" />
-          
+          <Image
+            src="/visaCard.svg"
+            alt="Visa"
+            width={60}
+            height={60}
+            className="h-10"
+          />
+          <Image
+            src="/nagad.svg"
+            alt="Nagad"
+            width={60}
+            height={60}
+            className="h-10"
+          />
+          <Image
+            src="/upay.svg"
+            alt="Upay"
+            width={60}
+            height={60}
+            className="h-10"
+          />
+
           {/* Add more payment option logos as needed */}
         </div>
       </div>
