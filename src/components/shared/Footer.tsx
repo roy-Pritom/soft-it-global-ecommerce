@@ -118,16 +118,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Ad Image */}
-        {/* <div className="flex justify-end">
-          <Image
-            src="https://cdn.bitcommerz.com/manfarebd/media/1716906731281-manfarebd-id-13.jpeg"
-            width={250}
-            height={200}
-            className="rounded-md"
-            alt="Ad"
-          />
-        </div> */}
       </div>
 
       {/* Payment Options */}

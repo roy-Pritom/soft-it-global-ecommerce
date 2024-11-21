@@ -6,8 +6,8 @@ import { useGetAllProductByCategoryQuery } from "@/redux/api/category/categoryAp
 import { useGetSingleProductQuery } from "@/redux/api/product/productApi";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+// import dynamic from "next/dynamic";
+// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-medium-image-zoom/dist/styles.css";
 import ImageShow from "@/components/ui/ImageShow";
 
@@ -112,7 +112,7 @@ const ProductViewPage = ({ params }: { params: ProductParams }) => {
             Delivery Options
           </button>
         </div>
-        <div className="mt-4">
+        {/* <div className="mt-4">
           {activeSection === "description" ? (
             <ReactQuill
               value={productData?.description || ""}
@@ -125,7 +125,7 @@ const ProductViewPage = ({ params }: { params: ProductParams }) => {
               {productData?.delivery}
             </div>
           )}
-        </div>
+        </div> */}
       </div>
 
       {/* Relavent Product */}
