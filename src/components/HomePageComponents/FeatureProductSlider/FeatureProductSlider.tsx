@@ -22,7 +22,7 @@ const FeatureProductSlider = () => {
         direction={"vertical"}
         slidesPerView={1}
         spaceBetween={30}
-        mousewheel={true}
+        mousewheel={false}
         autoplay={{
           delay: 1000,
           disableOnInteraction: false,

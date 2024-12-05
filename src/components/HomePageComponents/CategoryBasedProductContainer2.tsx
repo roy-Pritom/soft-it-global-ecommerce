@@ -58,7 +58,7 @@ const CategoryBasedProductContainer2 = () => {
           alt="category"
           width={350}
           height={400}
-          className="md:w-[30%] w-full rounded-lg"
+          className="md:w-[30%] md:h-[504px] h-full w-full rounded-lg"
         />
         
         {/* Slider Container */}
