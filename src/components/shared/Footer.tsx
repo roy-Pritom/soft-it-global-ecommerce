@@ -25,13 +25,14 @@ const Footer: React.FC = () => {
         <div className="space-y-1">
           <div className="flex items-center space-x-2">
             <Image
-              src="/Logo/manio-logo-2.png"
+              src="/Logo/Manio logonn2.png"
               alt="Manfare Logo"
-              width={100}
-              height={10}
-              className=""
+              width={150}
+              height={50}
+              className="mb-2"
             />
           </div>
+          {/* <p>branch</p> */}
           <p className="text-gray-400">be exclusive . be you</p>
           <p className="text-lg font-semibold text-primaryColor">
             +880 1711979475
@@ -113,7 +114,7 @@ const Footer: React.FC = () => {
               href="https://maniobd.com"
               className="text-primaryColor font-bold"
             >
-              Maniobd
+              maniobd.com
             </Link>
           </div>
         </div>
